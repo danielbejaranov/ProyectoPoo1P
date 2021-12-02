@@ -5,11 +5,16 @@ import java.util.Scanner;
 
 public class Main {
 
+<<<<<<< HEAD
 
     public static void main(String[] args) {
     /*
         INTERFAZ
         */
+=======
+    public static void main(String[] args) {
+    
+>>>>>>> 399ac67d9da1a424cc5c72a63c1584068ab02e58
         System.out.println("Menú de opciones");
         System.out.println("1. Dueño");
         System.out.println("2. Mascota");

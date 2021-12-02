@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
-/**
- *
- * @author Daniel Bejarano
- */
 public class Mascota {
     private int id, idDueño;
     private String nombre, raza, tipo;

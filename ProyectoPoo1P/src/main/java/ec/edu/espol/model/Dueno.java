@@ -15,10 +15,12 @@ public class Dueno extends Persona{
     private String direccion;
     private ArrayList<Mascota> mascotas;
 
-    public Dueno(String nombres, String direccion, String apellidos, String telefono, String email) {
+    public Dueno(int id, String nombres, String apellidos,String direccion, String telefono, String email) {
         super(id, nombres, apellidos, telefono, email);
         this.direccion = direccion;
     }
+
+   
 
 
     public String getDireccion() {
@@ -90,10 +92,6 @@ public class Dueno extends Persona{
         String email = sc.nextLine();
         Dueno d1 = new Dueno(nombres,apellidos,direccion,telefono,email);
          return d1;
-    }
-    @Override
-    public String toString() {
-        return "Dueño{" + "nombres=" + nombres + ", apellidos=" + apellidos + ", direccion=" + direccion + ", telefono=" + telefono + ", email=" + email + '}';
     }
     
     public void saveFile(String nomfile){

@@ -11,10 +11,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- *
- * @author sebastian
- */
 public class Concurso {
     private String nombre, fecha,fechaInscripcion,fechaCierre,tematica;
     private double costo;

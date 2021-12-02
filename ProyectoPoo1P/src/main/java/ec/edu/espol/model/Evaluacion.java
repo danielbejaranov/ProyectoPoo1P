@@ -12,10 +12,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-/**
- *
- * @author Daniel Bejarano
- */
 public class Evaluacion {
     private int id, idInscripcion, idMiembro;
     private Inscripcion inscripcion;

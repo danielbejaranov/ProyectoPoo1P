@@ -1,2 +1,1 @@
-<<<<<<< HEAD
 # ProyectoPoo1Ps

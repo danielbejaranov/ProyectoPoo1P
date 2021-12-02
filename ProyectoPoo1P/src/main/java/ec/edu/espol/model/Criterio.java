@@ -5,13 +5,10 @@
  */
 package ec.edu.espol.model;
 
-import java.util.ArrayList;
-
 /**
  *
- * @author Daniel Bejarano
+ * @author sebastian
  */
-public class Dueño {
-    private String direccion;
-    private ArrayList<Mascota> mascotas;
+public class Criterio {
+    
 }

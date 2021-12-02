@@ -1,74 +1,79 @@
 
 package ec.edu.espol.proyectopoo1p;
 
+import ec.edu.espol.model.Concurso;
+import ec.edu.espol.model.Dueno;
+import ec.edu.espol.model.Mascota;
+import ec.edu.espol.model.MiembroJurado;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
-<<<<<<< HEAD
 
     public static void main(String[] args) {
-    /*
-        INTERFAZ
-        */
-=======
-    public static void main(String[] args) {
-    
->>>>>>> 399ac67d9da1a424cc5c72a63c1584068ab02e58
-        System.out.println("Menú de opciones");
-        System.out.println("1. Dueño");
-        System.out.println("2. Mascota");
-        System.out.println("3. Concurso");
-        System.out.println("4. Premio");
-        System.out.println("5. Criterio");
-        System.out.println("6. Inscripción");
-        System.out.println("7. MiembroJurado");
-        System.out.println("8. Evaluacion");        
-    
-        int opcion;
+        Scanner sc = new Scanner(System.in);
         
-        do{ 
-            System.out.println("Ingrese una opcion: ");
-            Scanner sc = new Scanner(System.in);
+        int opcion = 0;
+        
+        do{
+            System.out.println("MENU DE OPCIONES");
+            System.out.println("1.Dueño");
+            System.out.println("2.Mascota");
+            System.out.println("3.Concurso");
+            System.out.println("4.Premio");
+            System.out.println("5.Criterio");
+            System.out.println("6.Inscripcion");
+            System.out.println("7.MiembroJurado");
+            System.out.println("8.Evaluacion");
+ 
+            System.out.println("Por favor digite una opción");
             opcion = sc.nextInt();
-            
-            switch(opcion){    
-                
-                case 1: 
-                    System.out.println("op1");
+            switch(opcion){
+                case 1:
+                    System.out.println("Dueño");
+                    Dueno dueño1 = Dueno.nextDueno(sc);
+                    ArrayList<Dueno> dueños = new ArrayList<>();
+                    dueños.add(dueño1);
+                    Dueno.saveFile(dueños, "dueños.txt");
                     break;
-                    
                 case 2:
-                    System.out.println("op2");
+                    System.out.println("Mascota");
+                    Mascota mascota1 = Mascota.nextMascota(sc);
+
                     break;
-                    
                 case 3:
-                    System.out.println("op3");
+                    System.out.println("Concurso");
+                    Concurso concurso1 = Concurso.nextConcurso(sc);
                     break;
-                    
                 case 4:
-                    System.out.println("op4");
+                    System.out.println("Premio");
+                    Premio premio1 = Premio.nextPremio(sc);
                     break;
-                    
                 case 5:
-                    System.out.println("op5");
+                    System.out.println("Criterio");
+                    Criterio criterio1 = Criterio.nextCriterio(sc);
                     break;
-                    
                 case 6:
-                    System.out.println("op6");
+                    System.out.println("Inscripcion");
+                    Inscripcion inscripcion1 = Inscripcion.nextInscripcion(sc);
                     break;
-                    
                 case 7:
-                    System.out.println("op7");
+                    System.out.println("Miembro del jurado");
+                    MiembroJurado miembroJurado1 = MiembroJurado.nextMiembroJurado(sc);
                     break;
-                    
                 case 8:
-                    System.out.println("op8");
+                    System.out.println("Evaluacion");
+                    Evaluacion evaluacion1 = Evaluacion.nextCalificacion(sc);
                     break;
-                    
-                default: System.out.println("Opcion invalida");
+                case 9:
                     break;
-            } 
-        } while (opcion >= 1) ;
-    }  
+                default:
+                    System.out.println("Opción invalida");
+            }
+        }while (opcion != 9);  
+        
+        System.out.println("EL PROGRAMA HA FINALIZADO");
+    }
+    
 }

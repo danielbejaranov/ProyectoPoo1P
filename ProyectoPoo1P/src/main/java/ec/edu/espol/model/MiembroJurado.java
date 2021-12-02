@@ -9,6 +9,11 @@ package ec.edu.espol.model;
  *
  * @author Daniel Bejarano
  */
-public class MiembroJurado {
+public class MiembroJurado extends Persona{
+    private String perfil;
+    public MiembroJurado(int id, String nombres, String apellidos, String telefono, String email, String perfil) {
+        super(id, nombres, apellidos, telefono, email);
+        this.perfil = perfil;
+    }
     
 }

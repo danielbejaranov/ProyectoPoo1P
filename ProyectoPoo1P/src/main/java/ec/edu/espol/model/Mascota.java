@@ -7,6 +7,7 @@ package ec.edu.espol.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 /**
  *
@@ -16,8 +17,8 @@ public class Mascota {
     private int id, idDueño;
     private String nombre, raza, tipo;
     private Date fechaNacimiento;
-    private Dueño dueño;
-    private ArrayList<Inscripción> inscripciones;
+    private Dueno dueño;
+    private ArrayList<Inscripcion> inscripciones;
 
     public int getId() {
         return id;
@@ -67,21 +68,60 @@ public class Mascota {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Dueño getDueño() {
+    public Dueno getDueño() {
         return dueño;
     }
 
-    public void setDueño(Dueño dueño) {
+    public void setDueño(Dueno dueño) {
         this.dueño = dueño;
     }
 
-    public ArrayList<Inscripción> getInscripciones() {
+    public ArrayList<Inscripcion> getInscripciones() {
         return inscripciones;
     }
 
-    public void setInscripciones(ArrayList<Inscripción> inscripciones) {
+    public void setInscripciones(ArrayList<Inscripcion> inscripciones) {
         this.inscripciones = inscripciones;
     }
+
+    public Mascota(String nombre, String raza, String tipo, String fechaNacimiento1) {
+        this.id = id;
+        this.idDueño = idDueño;
+        this.nombre = nombre;
+        this.raza = raza;
+        this.tipo = tipo;
+        this.fechaNacimiento = fechaNacimiento;
+        this.dueño = dueño;
+        this.inscripciones = inscripciones;
+    }
+
+    public Mascota(String nombre, String raza, String tipo, Date fechaNacimiento) {
+        this.nombre = nombre;
+        this.raza = raza;
+        this.tipo = tipo;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    @Override
+    public String toString() {
+        return "Mascota{" + "nombre=" + nombre + ", raza=" + raza + ", tipo=" + tipo + ", fechaNacimiento=" + fechaNacimiento + '}';
+    }
+
     
     
+   public static Mascota nextMascota (Scanner sc){
+        System.out.println("Ingrese el nombre de su mascota: ");
+        sc.nextLine();
+        String nombre = sc.nextLine();
+        System.out.println("Ingrese la raza de su mascota: ");
+        String raza = sc.nextLine();
+        System.out.println("Ingrese el tipo de su mascota: ");
+        String tipo = sc.nextLine();
+        System.out.println("Ingrese la fehca de nacimiento de su mascota: ");
+        String fechaNacimiento = sc.nextLine();
+        
+        
+         Mascota m1 = new Mascota(nombre,raza,tipo,fechaNacimiento);
+         return m1;
+    } 
 }

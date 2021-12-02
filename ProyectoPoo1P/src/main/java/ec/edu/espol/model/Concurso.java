@@ -5,6 +5,7 @@
  */
 package ec.edu.espol.model;
 
+<<<<<<< HEAD
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -105,4 +106,12 @@ public class Concurso {
         System.out.println(e.getMessage());
         }
     }
+=======
+/**
+ *
+ * @author Daniel Bejarano
+ */
+public class Concurso {
+    
+>>>>>>> 637c0e93b3fc62d109e7dea6781297f0d61ee1c8
 }

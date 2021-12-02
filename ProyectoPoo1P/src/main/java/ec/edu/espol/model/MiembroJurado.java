@@ -5,6 +5,7 @@
  */
 package ec.edu.espol.model;
 
+import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -66,21 +67,26 @@ public class MiembroJurado extends Persona{
     public void setEmail(String email) {
         this.email = email;
     }
-    public static MiembroJurado nextMiembroJurado (Scanner sc){
+    public static MiembroJurado nextMiembroJurado (Scanner sc, String nomfile){
+        sc.useDelimiter("\n");
+
+        int id = Util.nextID(nomfile);
         System.out.println("Ingrese los nombres: ");
-        sc.nextLine();
-        String nombres = sc.nextLine();
+        String nombres = sc.next();
         System.out.println("Ingrese los apellidos: ");
-        String apellidos = sc.nextLine();
+        String apellidos = sc.next();
         System.out.println("Ingrese el telefono: ");
-        String telefono = sc.nextLine();
+        String telefono = sc.next();
         System.out.println("Ingrese el correo: ");
-        String email = sc.nextLine();
+        String email = sc.next();
         System.out.println("Ingrese el perfil: ");
-        String perfil = sc.nextLine();
-        MiembroJurado mj1 = new MiembroJurado(nombres,apellidos,telefono,email,perfil);
-         return mj1;
+        String perfil = sc.next();
+        
+        MiembroJurado personaJurado = new MiembroJurado(id,nombres,apellidos,telefono,email,perfil);
+        personaJurado.saveFile(nomfile);
+        return personaJurado;
     }
+    
     public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
             pw.println(this.nombres + "," + this.apellidos + "," + this.telefono + "," + this.email + "," + this.perfil);

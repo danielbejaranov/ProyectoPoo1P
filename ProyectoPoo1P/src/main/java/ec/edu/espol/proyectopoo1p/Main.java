@@ -35,16 +35,13 @@ public class Main {
             opcion = sc.nextInt();
             switch(opcion){
                 case 1:
-                    System.out.println("Dueño");
-                    Dueno dueño1 = Dueno.nextDueno(sc);
-                    ArrayList<Dueno> dueños = new ArrayList<>();
-                    dueños.add(dueño1);
-                    Dueno.saveFile(dueños, "dueños.txt");
+                    System.out.println("Registro Dueño");
+                    Dueno dueño = Dueno.nextDueno(sc, "dueños.txt");
                     break;
                 case 2:
-                    System.out.println("Mascota");
+                    System.out.println("Registro Mascota");
                     Mascota mascota1 = Mascota.nextMascota(sc);
-
+                    
                     break;
                 case 3:
                     System.out.println("Concurso");
@@ -64,7 +61,7 @@ public class Main {
                     break;
                 case 7:
                     System.out.println("Miembro del jurado");
-                    MiembroJurado miembroJurado1 = MiembroJurado.nextMiembroJurado(sc);
+                    MiembroJurado jurado = MiembroJurado.nextMiembroJurado(sc, "miembroJurados.txt");
                     break;
                 case 8:
                     System.out.println("Evaluacion");

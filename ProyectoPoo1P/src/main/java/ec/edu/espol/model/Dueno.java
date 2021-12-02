@@ -5,6 +5,7 @@
  */
 package ec.edu.espol.model;
 
+import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -19,9 +20,6 @@ public class Dueno extends Persona{
         super(id, nombres, apellidos, telefono, email);
         this.direccion = direccion;
     }
-
-   
-
 
     public String getDireccion() {
         return direccion;
@@ -78,25 +76,29 @@ public class Dueno extends Persona{
     public void setEmail(String email) {
         this.email = email;
     }
-    public static Dueno nextDueno (Scanner sc){
+    public static Dueno nextDueno (Scanner sc, String nomfile){
+        sc.useDelimiter("\n");
+
+        int id = Util.nextID(nomfile);        
         System.out.println("Ingrese sus nombres: ");
-        sc.nextLine();
-        String nombres = sc.nextLine();
+        String nombres = sc.next();
         System.out.println("Ingrese sus apellidos: ");
-        String apellidos = sc.nextLine();
+        String apellidos = sc.next();
         System.out.println("Ingrese su direccion: ");
-        String direccion = sc.nextLine();
+        String direccion = sc.next();
         System.out.println("Ingrese su telefono: ");
-        String telefono = sc.nextLine();
+        String telefono = sc.next();
         System.out.println("Ingrese su correo: ");
-        String email = sc.nextLine();
-        Dueno d1 = new Dueno(nombres,apellidos,direccion,telefono,email);
-         return d1;
+        String email = sc.next();
+
+        Dueno personaDueño = new Dueno(id,nombres,apellidos,direccion,telefono,email);
+        personaDueño.saveFile(nomfile);
+        return personaDueño;
     }
     
     public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
-            pw.println(this.nombres + "," + this.apellidos + "," + this.direccion + "," + this.telefono + "," + this.email);
+            pw.println(this.nombres + "|" + this.apellidos + "|" + this.direccion + "|" + this.telefono + "|" + this.email);
         }
         catch(Exception e){
         System.out.println(e.getMessage());

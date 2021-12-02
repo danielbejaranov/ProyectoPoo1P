@@ -5,13 +5,6 @@
  */
 package ec.edu.espol.model;
 
-<<<<<<< HEAD
-=======
-/**
- *
- * @author Daniel Bejarano
- */
->>>>>>> 637c0e93b3fc62d109e7dea6781297f0d61ee1c8
 public class Persona {
     protected int id;
     protected String nombres, apellidos, telefono, email;
@@ -62,7 +55,6 @@ public class Persona {
         this.apellidos = apellidos;
         this.telefono = telefono;
         this.email = email;
-    }
-    
+    }   
     
 }

@@ -7,27 +7,14 @@ package ec.edu.espol.model;
 
 import java.util.ArrayList;
 import java.util.Date;
-<<<<<<< HEAD
 import java.util.Scanner;
 
-=======
-
-/**
- *
- * @author Daniel Bejarano
- */
->>>>>>> 637c0e93b3fc62d109e7dea6781297f0d61ee1c8
 public class Mascota {
     private int id, idDueño;
     private String nombre, raza, tipo;
     private Date fechaNacimiento;
-<<<<<<< HEAD
     private Dueno dueño;
     private ArrayList<Inscripcion> inscripciones;
-=======
-    private Dueño dueño;
-    private ArrayList<Inscripción> inscripciones;
->>>>>>> 637c0e93b3fc62d109e7dea6781297f0d61ee1c8
 
     public int getId() {
         return id;
@@ -77,7 +64,6 @@ public class Mascota {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-<<<<<<< HEAD
     public Dueno getDueño() {
         return dueño;
     }
@@ -134,23 +120,4 @@ public class Mascota {
          Mascota m1 = new Mascota(nombre,raza,tipo,fechaNacimiento);
          return m1;
     } 
-=======
-    public Dueño getDueño() {
-        return dueño;
-    }
-
-    public void setDueño(Dueño dueño) {
-        this.dueño = dueño;
-    }
-
-    public ArrayList<Inscripción> getInscripciones() {
-        return inscripciones;
-    }
-
-    public void setInscripciones(ArrayList<Inscripción> inscripciones) {
-        this.inscripciones = inscripciones;
-    }
-    
-    
->>>>>>> 637c0e93b3fc62d109e7dea6781297f0d61ee1c8
 }

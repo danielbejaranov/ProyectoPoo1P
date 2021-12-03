@@ -40,7 +40,7 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Registro Mascota");
-                    Mascota mascota1 = Mascota.nextMascota(sc);
+                    /*Mascota mascota1 = Mascota.nextMascota(sc);*/
                     
                     break;
                 case 3:

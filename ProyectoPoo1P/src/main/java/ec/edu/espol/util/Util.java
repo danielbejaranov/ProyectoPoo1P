@@ -14,6 +14,8 @@ import java.util.Scanner;
  */
 public class Util {
     
+    private Util(){}
+    
     
     public static int nextID(String nomfile)
     {
@@ -31,5 +33,21 @@ public class Util {
         {
         }
         return id+1;
+    }
+
+    public static Boolean correoInFile(String correo, String archivo){
+        try(Scanner sc = new Scanner(new File(archivo)))
+        {
+           while(sc.hasNextLine()){
+               String linea = sc.nextLine();
+               String[] tokens = linea.split("\\|");
+               if(tokens[3].equals(correo))
+                   return true;
+           }   
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return false;
     }    
 }

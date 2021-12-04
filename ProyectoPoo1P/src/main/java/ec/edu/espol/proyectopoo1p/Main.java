@@ -13,12 +13,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        sc.useDelimiter("\n");        
         
-        int opcion = 0;
+        int opcion;
         
         do{
             System.out.println("MENU DE OPCIONES");
@@ -35,8 +34,7 @@ public class Main {
             opcion = sc.nextInt();
             switch(opcion){
                 case 1:
-                    System.out.println("Registro Dueño");
-                    Dueno dueño = Dueno.nextDueno(sc, "dueños.txt");
+                    Dueno.nextDueno(sc, "dueños.txt");
                     break;
                 case 2:
                     System.out.println("Registro Mascota");
@@ -45,7 +43,7 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("Concurso");
-                    Concurso concurso1 = Concurso.nextConcurso(sc);
+                    Concurso concurso = Concurso.nextConcurso(sc, "concursos.txt");
                     break;
                 case 4:
                     System.out.println("Premio");

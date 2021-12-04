@@ -5,6 +5,7 @@
  */
 package ec.edu.espol.model;
 
+import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -71,9 +72,11 @@ public class Concurso {
     public void setCosto(double costo) {
         this.costo = costo;
     }
-    public static Concurso nextConcurso (Scanner sc){
+    public static Concurso nextConcurso (Scanner sc, String nomfile){
+        System.out.println("Registrar Concurso");
+        
+        int id = Util.nextID(nomfile);                
         System.out.println("Ingrese el nombre: ");
-        sc.nextLine();
         String nombre = sc.nextLine();
         System.out.println("Ingrese la fecha: ");
         String fecha = sc.nextLine();

@@ -77,7 +77,7 @@ public class Dueno extends Persona{
         this.email = email;
     }
     public static Dueno nextDueno (Scanner sc, String nomfile){
-        sc.useDelimiter("\n");
+        System.out.println("Registrar Dueño");
 
         int id = Util.nextID(nomfile);        
         System.out.println("Ingrese sus nombres: ");
@@ -98,7 +98,7 @@ public class Dueno extends Persona{
     
     public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
-            pw.println(this.nombres + "|" + this.apellidos + "|" + this.direccion + "|" + this.telefono + "|" + this.email);
+            pw.println(this.id + "|" + this.nombres + "|" + this.apellidos + "|" + this.direccion + "|" + this.telefono + "|" + this.email);
         }
         catch(Exception e){
         System.out.println(e.getMessage());
@@ -107,10 +107,48 @@ public class Dueno extends Persona{
     public static void saveFile(ArrayList<Dueno> dueños, String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile)))){
             for(Dueno d : dueños)
-                pw.println(d.getNombres()+ "," + d.getApellidos() + "," + d.getDireccion() + "," + d.getTelefono() + "," + d.getEmail());
+                pw.println(d.getId() + "|" + d.getNombres()+ "|" + d.getApellidos() + "|" + d.getDireccion() + "|" + d.getTelefono() + "|" + d.getEmail());
         }
         catch(Exception e){
         System.out.println(e.getMessage());
         }
+    }
+    
+    public static ArrayList<Dueno> readFileDueño(String nomfile){
+        ArrayList<Dueno> dueños = new ArrayList<>();
+        try(Scanner sc = new Scanner(new File(nomfile))){
+            while(sc.hasNextLine())
+            {
+                String linea = sc.nextLine();
+                String[] tokens = linea.split("\\|");
+                Dueno dueño = new Dueno(Integer.parseInt(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5]);
+                dueños.add(dueño);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return dueños;        
+    }
+    
+    public static Dueno searchByCorreo(ArrayList<Dueno> dueños, String correo){
+        for(Dueno d: dueños)
+        {
+            if(d.email.equals(correo))
+                return d;
+        }
+        return null;
+    }
+    
+    public static int getIdDueñoSearhedByMail(String correo){
+        ArrayList<Dueno> dueños = readFileDueño("dueños.txt");
+        Dueno dueño = searchByCorreo(dueños, correo);
+        return dueño.id;
+    }
+    
+    public static Dueno getDueñoSearchedByMail(String correo){
+        ArrayList<Dueno> dueños = readFileDueño("dueños.txt");
+        Dueno dueño = searchByCorreo(dueños, correo);
+        return dueño;
     }
 }

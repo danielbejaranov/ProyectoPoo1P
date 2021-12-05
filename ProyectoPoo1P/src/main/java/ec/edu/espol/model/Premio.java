@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ec.edu.espol.model;
 
 import java.io.File;
@@ -35,13 +30,14 @@ public class Premio {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-   public static Premio nextPremio (Scanner sc){
+   public static Premio nextPremio (Scanner sc,String nomfile){
+       
         System.out.println("Ingrese el lugar: ");
-        sc.nextLine();
         int lugar = sc.nextInt();
         System.out.println("Ingrese una descripcion: ");
-        String descripcion = sc.nextLine();
+        String descripcion = sc.next();
         Premio p1 = new Premio(lugar,descripcion);
+        p1.saveFile(nomfile);
          return p1;
     }
    public void saveFile(String nomfile){
@@ -61,5 +57,6 @@ public class Premio {
         System.out.println(e.getMessage());
         }
     }
+    
 }
 

@@ -50,7 +50,7 @@ public class Main {
                     
                 case 4:
                     System.out.println("Premio");
-                    Premio premio1 = Premio.nextPremio(sc);
+                    Premio premio1 = Premio.nextPremio(sc,"premios.txt");
                     break;
                     
                 case 5:

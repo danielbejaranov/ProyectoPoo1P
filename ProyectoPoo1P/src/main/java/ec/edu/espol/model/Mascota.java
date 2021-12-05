@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+
+
 public class Mascota {
     private int id, idDueño;
     private String nombre, raza, tipo;
@@ -37,6 +39,71 @@ public class Mascota {
     public String toString() {
         return "Mascota{" + "nombre=" + nombre + ", raza=" + raza + ", tipo=" + tipo + ", fechaNacimiento=" + fechaNacimiento + '}';
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdDueño() {
+        return idDueño;
+    }
+
+    public void setIdDueño(int idDueño) {
+        this.idDueño = idDueño;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getRaza() {
+        return raza;
+    }
+
+    public void setRaza(String raza) {
+        this.raza = raza;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Dueno getDueño() {
+        return dueño;
+    }
+
+    public void setDueño(Dueno dueño) {
+        this.dueño = dueño;
+    }
+
+    public ArrayList<Inscripcion> getInscripciones() {
+        return inscripciones;
+    }
+
+    public void setInscripciones(ArrayList<Inscripcion> inscripciones) {
+        this.inscripciones = inscripciones;
+    }
+    
     
     
     public static Mascota nextMascota (Scanner sc, String nomfile){

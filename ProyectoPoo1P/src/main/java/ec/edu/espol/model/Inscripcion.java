@@ -129,4 +129,42 @@ public class Inscripcion {
         System.out.println(e.getMessage());
         }
     }
+    public static ArrayList<Inscripcion> readFileInscripciones(String nomfile){
+        ArrayList<Inscripcion> inscripciones = new ArrayList<>();
+        try(Scanner sc = new Scanner(new File(nomfile))){
+            while(sc.hasNextLine())
+            {
+                String linea = sc.nextLine();
+                String[] tokens = linea.split("\\|");
+                //Inscripcion inscripcion = new Inscripcion(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]), tokens[2], tokens[3], tokens[4], tokens[5], tokens[6]);
+                //                                          (int id, int idMascota, int idConcurso, Mascota mascota, Concurso concurso, ArrayList<Evaluacion> evaluaciones, double valor, double descuento)
+                //inscripciones.add(inscripcion);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+        //return jurados;        
+    }    
+    public static MiembroJurado searchByCorreo(ArrayList<Inscripcion> inscripciones, String correo){
+        for(Inscripcion i: inscripciones)
+        {
+            //if(i.email.equals(correo))
+                //return i;
+        }
+        return null;
+    }
+    
+    public static int getIdDueñoSearchedByMail(String correo){
+        ArrayList<Inscripcion> inscripciones = readFileInscripciones("miembroJurados.txt");
+        MiembroJurado jurado = searchByCorreo(inscripciones, correo);
+        return jurado.id;
+    }
+    
+    public static MiembroJurado getDueñoSearchedByMail(String correo){
+        ArrayList<Inscripcion> inscripciones = readFileInscripciones("miembroJurados.txt");
+        MiembroJurado jurado = searchByCorreo(inscripciones, correo);
+        return jurado;
+    }    
 }

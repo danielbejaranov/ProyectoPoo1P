@@ -5,6 +5,7 @@
  */
 package ec.edu.espol.model;
 
+import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -13,24 +14,23 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Evaluacion {
-    private int idInscripcion, idCriterio;
+    private int id, idInscripcion, idCriterio, idMiembroJurado;
     private Inscripcion inscripcion;
     private MiembroJurado miembroJurado;
-    private double Evaluacion;
+    private double nota;
+    private Criterio criterio;
 
-    public Evaluacion(String mail,int idInscripcion,int idCriterio,double notaEvaluacion) {
+    public Evaluacion(int id, int idInscripcion, int idCriterio, int idMiembroJurado, Inscripcion inscripcion, MiembroJurado miembroJurado, double nota, Criterio criterio) {
         this.id = id;
         this.idInscripcion = idInscripcion;
-        this.idMiembro = idMiembro;
+        this.idCriterio = idCriterio;
+        this.idMiembroJurado = idMiembroJurado;
         this.inscripcion = inscripcion;
         this.miembroJurado = miembroJurado;
         this.nota = nota;
+        this.criterio = criterio;
     }
-
-    public Evaluacion(double nota){
-        this.nota = nota;
-    }
-
+    
     public int getId() {
         return id;
     }
@@ -43,16 +43,24 @@ public class Evaluacion {
         return idInscripcion;
     }
 
-    public void setIdInscripcion(int idInscripción) {
-        this.idInscripcion = idInscripción;
+    public void setIdInscripcion(int idInscripcion) {
+        this.idInscripcion = idInscripcion;
     }
 
-    public int getIdMiembro() {
-        return idMiembro;
+    public int getIdCriterio() {
+        return idCriterio;
     }
 
-    public void setIdMiembro(int idMiembro) {
-        this.idMiembro = idMiembro;
+    public void setIdCriterio(int idCriterio) {
+        this.idCriterio = idCriterio;
+    }
+
+    public int getIdMiembroJurado() {
+        return idMiembroJurado;
+    }
+
+    public void setIdMiembroJurado(int idMiembroJurado) {
+        this.idMiembroJurado = idMiembroJurado;
     }
 
     public Inscripcion getInscripcion() {
@@ -79,52 +87,27 @@ public class Evaluacion {
         this.nota = nota;
     }
 
+    public Criterio getCriterio() {
+        return criterio;
+    }
+
+    public void setCriterio(Criterio criterio) {
+        this.criterio = criterio;
+    }
+
     @Override
     public String toString() {
         return "Evaluacion{" + "nota=" + nota + '}';
     }
-
     
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Evaluacion other = (Evaluacion) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (this.idInscripcion != other.idInscripcion) {
-            return false;
-        }
-        if (this.idMiembro != other.idMiembro) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.nota) != Double.doubleToLongBits(other.nota)) {
-            return false;
-        }
-        if (!Objects.equals(this.inscripcion, other.inscripcion)) {
-            return false;
-        }
-        if (!Objects.equals(this.miembroJurado, other.miembroJurado)) {
-            return false;
-        }
-        return true;
-    }
-
-    
-    public static Evaluacion nextCalificacion (Scanner sc){
-        System.out.println("Ingrese email del Jurado: ");
-        String mail = sc.nextLine();
+    public static Evaluacion nextCalificacion (Scanner sc, String nomfile){
+        int id = Util.nextID(nomfile);
+        String correo;        
+        do{
+            System.out.println("Ingrese el correo electrónico del Dueño de la mascota: ");
+            correo = sc.next();
+        }while(!(MiembroJurado.correoInFile(correo)));
         
-        System.out.println("Ingrese id de la inscripcion: ");
         int idInscripcion = sc.nextInt();
         
         System.out.println("Ingrese id del criterio: ");
@@ -133,8 +116,9 @@ public class Evaluacion {
         System.out.println("Ingrese la nota de la evaluacion: ");
         double notaEvaluacion = sc.nextDouble();
         
-        Evaluacion v1 = new Evaluacion(mail,idInscripcion,idCriterio,notaEvaluacion);
-         return v1;
+        //Evaluacion v1 = new Evaluacion(mail,idInscripcion,idCriterio,notaEvaluacion);
+        //Evaluacion evaluacion = Evaluacion(id, idInscripcion, idCriterio, idMiembroJurado, inscripcion, miembroJurado, nota, criterio);
+        return null;
     }
     public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
@@ -153,4 +137,5 @@ public class Evaluacion {
         System.out.println(e.getMessage());
         }
     }
+        
 }

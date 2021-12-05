@@ -110,8 +110,7 @@ public class Mascota {
         System.out.println("Registrar Mascota");
         
         int id = Util.nextID(nomfile);
-        String correo;
-        
+        String correo;        
         do{
             System.out.println("Ingrese el correo electrónico del Dueño de la mascota: ");
             correo = sc.next();

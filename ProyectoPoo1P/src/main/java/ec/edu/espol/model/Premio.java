@@ -38,7 +38,9 @@ public class Premio {
         int id = Util.nextID(nomfile);
         String correo;
        
-        //int idDueño = getIdDueñoSearchedByMail(correo);//agregar la busqueda de id
+        //int idDueño = getIdDueñoSearchedByMail(correo);//Hay que generar el mecanismo de ganar, comparando todos los competidores
+        // Luego obtenemos los dueños ganadores, a partir obtenemos el id de cada uno
+        
         
         
         System.out.println("Ingrese el lugar: ");

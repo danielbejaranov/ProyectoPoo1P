@@ -13,12 +13,12 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Evaluacion {
-    private int id, idInscripcion, idMiembro;
+    private int idInscripcion, idCriterio;
     private Inscripcion inscripcion;
     private MiembroJurado miembroJurado;
-    private double nota;
+    private double Evaluacion;
 
-    public Evaluacion(int id, int idInscripcion, int idMiembro, Inscripcion inscripcion, MiembroJurado miembroJurado, double nota) {
+    public Evaluacion(String mail,int idInscripcion,int idCriterio,double notaEvaluacion) {
         this.id = id;
         this.idInscripcion = idInscripcion;
         this.idMiembro = idMiembro;
@@ -121,10 +121,19 @@ public class Evaluacion {
 
     
     public static Evaluacion nextCalificacion (Scanner sc){
-        System.out.println("Ingrese la Evaluacion: ");
-        sc.nextLine();
-        double nota = sc.nextDouble();
-        Evaluacion v1 = new Evaluacion(nota);
+        System.out.println("Ingrese email del Jurado: ");
+        String mail = sc.nextLine();
+        
+        System.out.println("Ingrese id de la inscripcion: ");
+        int idInscripcion = sc.nextInt();
+        
+        System.out.println("Ingrese id del criterio: ");
+        int idCriterio = sc.nextInt();
+        
+        System.out.println("Ingrese la nota de la evaluacion: ");
+        double notaEvaluacion = sc.nextDouble();
+        
+        Evaluacion v1 = new Evaluacion(mail,idInscripcion,idCriterio,notaEvaluacion);
          return v1;
     }
     public void saveFile(String nomfile){

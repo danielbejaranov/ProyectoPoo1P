@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ec.edu.espol.model;
 
 import ec.edu.espol.util.Util;
@@ -79,7 +75,7 @@ public class Concurso {
         
         int id = Util.nextID(nomfile);                
         System.out.println("Ingrese el nombre del concurso: ");
-        String nombre = sc.nextLine();
+        String nombre = sc.next();
         
         System.out.println("Fecha del concurso");
         System.out.println("Ingrese el año del concurso: ");
@@ -88,7 +84,11 @@ public class Concurso {
         int mesConcurso = sc.nextInt() - 1;
         System.out.println("Ingrese el día del concurso: ");
         int diaConcurso = sc.nextInt();
-        Date fechaConcurso = new Date(yearConcurso, mesConcurso, diaConcurso);
+        System.out.println("Ingrese hora de inicio del concurso");
+        int horaConcurso = sc.nextInt();
+        System.out.println("Ingrese minuto de inicio del concurso");
+        int minutoConcurso = sc.nextInt();
+        Date fechaConcurso = new Date(yearConcurso, mesConcurso, diaConcurso,horaConcurso,minutoConcurso);
         
         System.out.println("Ingrese la fecha de inicio de inscripciones ");        
         System.out.println("Ingrese el año del concurso: ");
@@ -109,17 +109,17 @@ public class Concurso {
         Date fechaCierre = new Date(yearCierre, mesCierre, diaCierre);
         
         System.out.println("Ingrese la tematica: ");
-        String tematica = sc.nextLine();
+        String tematica = sc.next();
         System.out.println("Ingrese el costo: ");
         double costo = sc.nextDouble();
         Concurso concurso = new Concurso(nombre,fechaConcurso,fechaInicio,fechaCierre,tematica,costo);
         
-        
+        concurso.saveFile(nomfile);  
         return concurso;
     }
     public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
-            pw.println(this.nombre + "," + this.fechaConcurso + "," + this.fechaInicio + "," + this.fechaCierre + "," + this.tematica + "," + this.costo);
+            pw.println(this.nombre + "|" + this.fechaConcurso + "|" + this.fechaInicio + "|" + this.fechaCierre + "|" + this.tematica + "|" + this.costo);
         }
         catch(Exception e){
         System.out.println(e.getMessage());
@@ -128,7 +128,7 @@ public class Concurso {
     public static void saveFile(ArrayList<Concurso> concursos, String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile)))){
             for(Concurso m : concursos)
-                pw.println(m.getNombre()+ "," + m.getFechaConcurso() + "," + m.getFechaInicio() + "," + m.getFechaCierre()+ "," + m.getTematica()+ "," + m.getCosto());
+                pw.println(m.getNombre()+ "|" + m.getFechaConcurso() + "|" + m.getFechaInicio() + "|" + m.getFechaCierre()+ "|" + m.getTematica()+ "|" + m.getCosto());
         }
         catch(Exception e){
         System.out.println(e.getMessage());

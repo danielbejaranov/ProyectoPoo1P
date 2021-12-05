@@ -37,45 +37,6 @@ public class Dueno extends Persona{
         this.mascotas = mascotas;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
     public static Dueno nextDueno (Scanner sc, String nomfile){
         System.out.println("Registrar Dueño");
 
@@ -107,7 +68,7 @@ public class Dueno extends Persona{
     public static void saveFile(ArrayList<Dueno> dueños, String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile)))){
             for(Dueno d : dueños)
-                pw.println(d.getId() + "|" + d.getNombres()+ "|" + d.getApellidos() + "|" + d.getDireccion() + "|" + d.getTelefono() + "|" + d.getEmail());
+                pw.println(d.id+ "|" + d.nombres+ "|" + d.apellidos + "|" + d.direccion + "|" + d.telefono + "|" + d.email);
         }
         catch(Exception e){
         System.out.println(e.getMessage());
@@ -135,12 +96,12 @@ public class Dueno extends Persona{
         for(Dueno d: dueños)
         {
             if(d.email.equals(correo))
-                return d;
+                return d; // dar formato
         }
         return null;
     }
     
-    public static int getIdDueñoSearhedByMail(String correo){
+    public static int getIdDueñoSearchedByMail(String correo){
         ArrayList<Dueno> dueños = readFileDueño("dueños.txt");
         Dueno dueño = searchByCorreo(dueños, correo);
         return dueño.id;

@@ -10,16 +10,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Concurso {
-    private String nombre, fecha,fechaInscripcion,fechaCierre,tematica;
+    private String nombre,tematica;
+    private Date fechaConcurso,fechaInicio,fechaCierre;
     private double costo;
 
-    public Concurso(String nombre, String fecha, String fechaInscripcion, String fechaCierre, String tematica, double costo) {
+    public Concurso(String nombre, Date fechaConcurso, Date fechaInicio, Date fechaCierre, String tematica, double costo) {
         this.nombre = nombre;
-        this.fecha = fecha;
-        this.fechaInscripcion = fechaInscripcion;
+        this.fechaConcurso = fechaConcurso;
+        this.fechaInicio = fechaInicio;
         this.fechaCierre = fechaCierre;
         this.tematica = tematica;
         this.costo = costo;
@@ -33,27 +35,27 @@ public class Concurso {
         this.nombre = nombre;
     }
 
-    public String getFecha() {
-        return fecha;
+    public Date getFechaConcurso() {
+        return fechaConcurso;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setFechaConcurso(Date fechaConcurso) {
+        this.fechaConcurso = fechaConcurso;
     }
 
-    public String getFechaInscripcion() {
-        return fechaInscripcion;
+    public Date getFechaInicio() {
+        return fechaInicio;
     }
 
-    public void setFechaInscripcion(String fechaInscripcion) {
-        this.fechaInscripcion = fechaInscripcion;
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
-    public String getFechaCierre() {
+    public Date getFechaCierre() {
         return fechaCierre;
     }
 
-    public void setFechaCierre(String fechaCierre) {
+    public void setFechaCierre(Date fechaCierre) {
         this.fechaCierre = fechaCierre;
     }
 
@@ -76,24 +78,48 @@ public class Concurso {
         System.out.println("Registrar Concurso");
         
         int id = Util.nextID(nomfile);                
-        System.out.println("Ingrese el nombre: ");
+        System.out.println("Ingrese el nombre del concurso: ");
         String nombre = sc.nextLine();
-        System.out.println("Ingrese la fecha: ");
-        String fecha = sc.nextLine();
-        System.out.println("Ingrese la fechaInscripcion: ");
-        String fechaInscripcion = sc.nextLine();
-        System.out.println("Ingrese la fechaCierre: ");
-        String fechaCierre = sc.nextLine();
+        
+        System.out.println("Fecha del concurso");
+        System.out.println("Ingrese el año del concurso: ");
+        int yearConcurso = sc.nextInt() - 1900;
+        System.out.println("Ingrese el mes del concurso: ");
+        int mesConcurso = sc.nextInt() - 1;
+        System.out.println("Ingrese el día del concurso: ");
+        int diaConcurso = sc.nextInt();
+        Date fechaConcurso = new Date(yearConcurso, mesConcurso, diaConcurso);
+        
+        System.out.println("Ingrese la fecha de inicio de inscripciones ");        
+        System.out.println("Ingrese el año del concurso: ");
+        int yearInicio = sc.nextInt() - 1900;
+        System.out.println("Ingrese el mes del concurso: ");
+        int mesInicio = sc.nextInt() -1;
+        System.out.println("Ingrese el día del concurso: ");
+        int diaInicio = sc.nextInt();
+        Date fechaInicio = new Date(yearInicio, mesInicio, diaInicio);        
+
+        System.out.println("Ingrese la fecha de cierre de incripciones ");
+        System.out.println("Ingrese el año del concurso: ");
+        int yearCierre = sc.nextInt() -1900;
+        System.out.println("Ingrese el mes del concurso: ");
+        int mesCierre = sc.nextInt() - 1 ;
+        System.out.println("Ingrese el día del concurso: ");
+        int diaCierre = sc.nextInt();
+        Date fechaCierre = new Date(yearCierre, mesCierre, diaCierre);
+        
         System.out.println("Ingrese la tematica: ");
         String tematica = sc.nextLine();
         System.out.println("Ingrese el costo: ");
         double costo = sc.nextDouble();
-        Concurso co1 = new Concurso(nombre,fecha,fechaInscripcion,fechaCierre,tematica,costo);
-        return co1;
+        Concurso concurso = new Concurso(nombre,fechaConcurso,fechaInicio,fechaCierre,tematica,costo);
+        
+        
+        return concurso;
     }
     public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
-            pw.println(this.nombre + "," + this.fecha + "," + this.fechaInscripcion + "," + this.fechaCierre + "," + this.tematica + "," + this.costo);
+            pw.println(this.nombre + "," + this.fechaConcurso + "," + this.fechaInicio + "," + this.fechaCierre + "," + this.tematica + "," + this.costo);
         }
         catch(Exception e){
         System.out.println(e.getMessage());
@@ -102,7 +128,7 @@ public class Concurso {
     public static void saveFile(ArrayList<Concurso> concursos, String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile)))){
             for(Concurso m : concursos)
-                pw.println(m.getNombre()+ "," + m.getFecha() + "," + m.getFechaInscripcion() + "," + m.getFechaCierre()+ "," + m.getTematica()+ "," + m.getCosto());
+                pw.println(m.getNombre()+ "," + m.getFechaConcurso() + "," + m.getFechaInicio() + "," + m.getFechaCierre()+ "," + m.getTematica()+ "," + m.getCosto());
         }
         catch(Exception e){
         System.out.println(e.getMessage());

@@ -151,4 +151,20 @@ public class Dueno extends Persona{
         Dueno dueño = searchByCorreo(dueños, correo);
         return dueño;
     }
+    
+    public static Boolean correoInFile(String correo){
+        try(Scanner sc = new Scanner(new File("dueños.txt")))
+        {
+            while(sc.hasNextLine()){                
+                String linea = sc.nextLine();
+                String[] tokens = linea.split("\\|");
+                if(tokens[5].equals(correo))
+                    return true;
+           }   
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }    
 }

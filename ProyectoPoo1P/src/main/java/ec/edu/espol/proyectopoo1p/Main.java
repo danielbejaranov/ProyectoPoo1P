@@ -37,9 +37,7 @@ public class Main {
                     Dueno.nextDueno(sc, "dueños.txt");
                     break;
                 case 2:
-                    System.out.println("Registro Mascota");
-                    /*Mascota mascota1 = Mascota.nextMascota(sc);*/
-                    
+                    Mascota.nextMascota(sc, "mascotas.txt");                    
                     break;
                 case 3:
                     System.out.println("Concurso");

@@ -103,14 +103,14 @@ public class Mascota {
     }
     
     public static Mascota nextMascota (Scanner sc, String nomfile){
-        System.out.println("Registrar Dueño");
+        System.out.println("Registrar Mascota");
         
         int id = Util.nextID(nomfile);
         String correo;
         do{
             System.out.println("Ingrese el correo electrónico del Dueño de la mascota: ");
             correo = sc.next();
-        }while(Util.correoInFile(correo, "dueños.txt"));
+        }while(Dueno.correoInFile(correo));
         int idDueño = getIdDueñoSearhedByMail(correo);
         Dueno dueño = getDueñoSearchedByMail(correo);
         System.out.println("Ingrese el nombre de su mascota: ");
@@ -120,13 +120,13 @@ public class Mascota {
         System.out.println("Ingrese el tipo de su mascota: ");
         String tipo = sc.next();
         System.out.println("Ingrese el año de nacimiento de su mascota: ");
-        int year = sc.nextInt();
+        int year = sc.nextInt() - 1900;
         System.out.println("Ingrese el mes de nacimiento de su mascota: ");
-        int mes = sc.nextInt();
+        int mes = sc.nextInt() - 1;
         System.out.println("Ingrese el día de nacimiento de su mascota:");
         int dia = sc.nextInt();
         Date fechaNacimiento = new Date(year, mes, dia);
-                
+        
         Mascota mascota = new Mascota(id, idDueño, nombre, raza, tipo, fechaNacimiento, dueño);
         mascota.saveFile(nomfile);        
         return mascota;
@@ -134,7 +134,7 @@ public class Mascota {
 
     public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
-            pw.println(this.id + "|" + this.idDueño + "|" + this.nombre + "|" + this.raza + "|" + this.tipo + "|" + this.fechaNacimiento + "|" + this.dueño);
+            pw.println(this.id + "|" + this.idDueño + "|" + this.nombre + "|" + this.raza + "|" + this.tipo + "|" + this.fechaNacimiento + "|" + this.dueño + "|" + this.inscripciones);
         }
         catch(Exception e){
         System.out.println(e.getMessage());
@@ -144,7 +144,7 @@ public class Mascota {
     public static void saveFile(ArrayList<Mascota> mascotas, String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile)))){
             for(Mascota m : mascotas)
-                pw.println(m.getId() + "|" +m.getIdDueño()+ "|" + m.getNombre() + "|" + m.getRaza() + "|" + m.getTipo() + "|" + m.getFechaNacimiento() + "|" + m.getDueño());
+                pw.println(m.getId() + "|" +m.getIdDueño()+ "|" + m.getNombre() + "|" + m.getRaza() + "|" + m.getTipo() + "|" + m.getFechaNacimiento() + "|" + m.getDueño() + "|" + m.getInscripciones());
         }
         catch(Exception e){
         System.out.println(e.getMessage());

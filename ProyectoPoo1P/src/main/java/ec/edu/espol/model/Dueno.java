@@ -27,7 +27,7 @@ public class Dueno extends Persona{
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    
+
     public static Dueno nextDueno (Scanner sc, String nomfile){
         System.out.println("Registrar Dueño");
 
@@ -40,11 +40,8 @@ public class Dueno extends Persona{
         String direccion = sc.next();
         System.out.println("Ingrese su telefono: ");
         String telefono = sc.next();
-        String email;
-        do{
-            System.out.println("Ingrese el correo: ");
-            email = sc.next();
-        }while(!(Dueno.correoInFile(email)));
+        System.out.println("Ingrese su correo: ");
+        String email = sc.next();
 
         Dueno personaDueño = new Dueno(id,nombres,apellidos,direccion,telefono,email);
         personaDueño.saveFile(nomfile);

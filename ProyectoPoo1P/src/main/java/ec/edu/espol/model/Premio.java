@@ -18,6 +18,12 @@ public class Premio {
        this.descripcion = descripcion;
    } 
 
+    public Premio(int lugar, int id, String descripcion) {
+        this.lugar = lugar;
+        this.id = id;
+        this.descripcion = descripcion;
+    }
+
     public int getLugar() {
         return lugar;
     }
@@ -64,6 +70,7 @@ public class Premio {
             String descripcion = sc.next();
             //Premio p1 = new Premio(id,lugar,descripcion);
             //premios.add(p1);
+            Concurso cn = new Concurso(id,);
             return null;
         } 
 

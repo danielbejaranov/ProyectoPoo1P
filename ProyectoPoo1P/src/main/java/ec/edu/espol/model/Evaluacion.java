@@ -20,15 +20,12 @@ public class Evaluacion {
     private double nota;
     private Criterio criterio;
 
-    public Evaluacion(int id, int idInscripcion, int idCriterio, int idMiembroJurado, Inscripcion inscripcion, MiembroJurado miembroJurado, double nota, Criterio criterio) {
+    public Evaluacion(int id, int idInscripcion, int idCriterio, int idMiembroJurado, double nota) {
         this.id = id;
         this.idInscripcion = idInscripcion;
         this.idCriterio = idCriterio;
         this.idMiembroJurado = idMiembroJurado;
-        this.inscripcion = inscripcion;
-        this.miembroJurado = miembroJurado;
         this.nota = nota;
-        this.criterio = criterio;
     }
     
     public int getId() {
@@ -108,6 +105,7 @@ public class Evaluacion {
             correo = sc.next();
         }while(!(MiembroJurado.correoInFile(correo)));
         
+        System.out.println("Ingrese el id de la inscripción: ");
         int idInscripcion = sc.nextInt();
         
         System.out.println("Ingrese id del criterio: ");

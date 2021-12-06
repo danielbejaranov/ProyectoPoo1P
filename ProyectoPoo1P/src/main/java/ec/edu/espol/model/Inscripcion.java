@@ -128,9 +128,10 @@ public class Inscripcion {
         System.out.println("Ingrese el día de inscripción : ");
         int diaI = sc.nextInt();
         Date fechaInscripcion = new Date(yearI, mesI, diaI);        
-
-        Inscripcion i1 = new Inscripcion(id, idMascota, idConcurso,valor, fechaInscripcion);
-        return i1;
+                
+        Inscripcion i = new Inscripcion(id, idMascota, idConcurso,valor, fechaInscripcion);
+        i.saveFile(nomfile);        
+        return i;
     }
     
     public void saveFile(String nomfile){

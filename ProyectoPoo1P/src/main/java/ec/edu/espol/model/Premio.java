@@ -57,26 +57,34 @@ public class Premio {
     }
     
     
-    public static ArrayList<Premio> nextPremio (Scanner sc,String nomfile){
+    public static void nextPremio (Scanner sc,String nomfile){
         //NO SÉ CÓMO CONSTRUIR EL PREMIO, LO MISMO SUCEDE CON CRITERIO
         int id = Util.nextID(nomfile);
         System.out.println("Ingrese el número de Premios");
         int numeroPremios = sc.nextInt();
         ArrayList<Premio> premios = new ArrayList<>();
+        
         for(int i = 0; i < numeroPremios; i++){
             System.out.println("Ingrese el lugar: ");
             int lugar = sc.nextInt();
             System.out.println("Ingrese una descripcion: ");
             String descripcion = sc.next();
-            //Premio p1 = new Premio(id,lugar,descripcion);
-            //premios.add(p1);
-            Concurso cn = new Concurso(id,);
-            return null;
+            
+            Premio p1 = new Premio(id,lugar,descripcion);
+            premios.add(p1);
         } 
-
+        
+        System.out.println("Ingrese nombre del concurso: ");
+        String nombreConcurso = sc.next();
+        int idConcurso = Concurso.getIdConcursoSearchedByNombre(nombreConcurso);
+                
+        for (Premio p : premios)
+        {
+            p.setIdConcurso(id);
+        }
         saveFile(premios,nomfile);
-        return null;
     }
+    
     public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
             pw.println(this.id+","+this.lugar + "," + this.descripcion );

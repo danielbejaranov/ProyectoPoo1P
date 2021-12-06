@@ -55,7 +55,7 @@ public class Main {
                     
                 case 5:
                     System.out.println("Criterio");
-                    Criterio criterio1 = Criterio.nextCriterio(sc);
+                    Criterio.nextCriterio(sc,"criterios.txt");
                     break;
                     
                 case 6:

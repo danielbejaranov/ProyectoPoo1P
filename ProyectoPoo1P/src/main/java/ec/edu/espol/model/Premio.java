@@ -58,7 +58,7 @@ public class Premio {
     
     
     public static void nextPremio (Scanner sc,String nomfile){
-        //NO SÉ CÓMO CONSTRUIR EL PREMIO, LO MISMO SUCEDE CON CRITERIO
+
         int id = Util.nextID(nomfile);
         System.out.println("Ingrese el número de Premios");
         int numeroPremios = sc.nextInt();

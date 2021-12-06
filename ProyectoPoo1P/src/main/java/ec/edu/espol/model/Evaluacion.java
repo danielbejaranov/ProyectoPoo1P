@@ -100,7 +100,7 @@ public class Evaluacion {
         return "Evaluacion{" + "nota=" + nota + '}';
     }
     
-    public static Evaluacion nextCalificacion (Scanner sc, String nomfile){
+    public static Evaluacion nextEvaluacion (Scanner sc, String nomfile){
         int id = Util.nextID(nomfile);
         String correo;        
         do{

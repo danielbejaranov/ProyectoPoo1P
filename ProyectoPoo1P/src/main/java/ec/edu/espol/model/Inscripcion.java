@@ -5,12 +5,15 @@
  */
 package ec.edu.espol.model;
 
-import java.util.ArrayList;
+import static ec.edu.espol.model.Concurso.getIdConcursoSearchedByNombre;
+import static ec.edu.espol.model.Mascota.getIdMascotaSearchedByNombre;
+import ec.edu.espol.util.Util;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Inscripcion {
@@ -19,21 +22,19 @@ public class Inscripcion {
     private Concurso concurso;
     private ArrayList<Evaluacion> evaluaciones;
     private double valor, descuento;
+    private Date fechaInscripcion;
 
-    public Inscripcion(double valor, double descuento) {
+    public Inscripcion(double valor) {
         this.valor = valor;
         this.descuento = descuento;
     }
 
-    public Inscripcion(int id, int idMascota, int idConcurso, Mascota mascota, Concurso concurso, ArrayList<Evaluacion> evaluaciones, double valor, double descuento) {
+    public Inscripcion(int id, int idMascota, int idConcurso, double valor, Date fechaInscripcion) {
         this.id = id;
         this.idMascota = idMascota;
         this.idConcurso = idConcurso;
-        this.mascota = mascota;
-        this.concurso = concurso;
-        this.evaluaciones = evaluaciones;
         this.valor = valor;
-        this.descuento = descuento;
+        this.fechaInscripcion = fechaInscripcion;
     }
 
     public int getId() {
@@ -104,14 +105,34 @@ public class Inscripcion {
     public String toString() {
         return "Inscripcion{" + "valor=" + valor + ", descuento=" + descuento + '}';
     }
-    public static Inscripcion nextInscripcion (Scanner sc){
+    
+    public static Inscripcion nextInscripcion (Scanner sc, String nomfile){
+        int id = Util.nextID(nomfile);
+        
+        System.out.println("Ingrese el nombre de la mascota: ");
+        String nombreMascota = sc.next();
+        int idMascota = getIdMascotaSearchedByNombre(nombreMascota);
+        
+        System.out.println("Ingrese el nombre del concurso: ");
+        String nombreConcurso = sc.next();
+        int idConcurso = getIdConcursoSearchedByNombre(nombreConcurso);
+        
         System.out.println("Ingrese el valor: ");
-        sc.nextLine();
-        double descuento = sc.nextDouble();
-        System.out.println("Ingrese el decuento: ");
         double valor = sc.nextDouble();
-        Inscripcion i1 = new Inscripcion(valor,descuento);
-        return i1;}
+        
+        System.out.println("Ingrese la fecha de inscripción ");        
+        System.out.println("Ingrese el año de inscripción : ");
+        int yearI = sc.nextInt() - 1900;
+        System.out.println("Ingrese el mes de inscripción : ");
+        int mesI = sc.nextInt() -1;
+        System.out.println("Ingrese el día de inscripción : ");
+        int diaI = sc.nextInt();
+        Date fechaInscripcion = new Date(yearI, mesI, diaI);        
+
+        Inscripcion i1 = new Inscripcion(id, idMascota, idConcurso,valor, fechaInscripcion);
+        return i1;
+    }
+    
     public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
             pw.println(this.valor + "," + this.descuento );

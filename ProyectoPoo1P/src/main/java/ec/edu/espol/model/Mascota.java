@@ -21,17 +21,15 @@ public class Mascota {
     private int id, idDueño;
     private String nombre, raza, tipo;
     private Date fechaNacimiento;
-    private Dueno dueño;
     private ArrayList<Inscripcion> inscripciones;
 
-    public Mascota(int id, int idDueño, String nombre, String raza, String tipo, Date fechaNacimiento, Dueno dueño) {
+    public Mascota(int id, int idDueño, String nombre, String raza, String tipo, Date fechaNacimiento) {
         this.id = id;
         this.idDueño = idDueño;
         this.nombre = nombre;
         this.raza = raza;
         this.tipo = tipo;
         this.fechaNacimiento = fechaNacimiento;
-        this.dueño = dueño;
         this.inscripciones = new ArrayList();
     }
 
@@ -88,14 +86,6 @@ public class Mascota {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Dueno getDueño() {
-        return dueño;
-    }
-
-    public void setDueño(Dueno dueño) {
-        this.dueño = dueño;
-    }
-
     public ArrayList<Inscripcion> getInscripciones() {
         return inscripciones;
     }
@@ -117,7 +107,6 @@ public class Mascota {
         }while(!(Dueno.correoInFile(correo)));
         
         int idDueño = getIdDueñoSearchedByMail(correo);
-        Dueno dueño = getDueñoSearchedByMail(correo);
         System.out.println("Ingrese el nombre de su mascota: ");
         String nombre = sc.next();
         
@@ -138,7 +127,7 @@ public class Mascota {
         
         Date fechaNacimiento = new Date(year, mes, dia);
         
-        Mascota mascota = new Mascota(id, idDueño, nombre, raza, tipo, fechaNacimiento, dueño);
+        Mascota mascota = new Mascota(id, idDueño, nombre, raza, tipo, fechaNacimiento);
         mascota.saveFile(nomfile);   
         
         return mascota;
@@ -146,7 +135,7 @@ public class Mascota {
 
     public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
-            pw.println(this.id + "|" + this.idDueño + "|" + this.nombre + "|" + this.raza + "|" +  this.fechaNacimiento + "|" + this.tipo  + "|" + this.dueño + "|" );
+            pw.println(this.id + "|" + this.idDueño + "|" + this.nombre + "|" + this.raza + "|" +  this.fechaNacimiento + "|" + this.tipo);
         }
         catch(Exception e){
         System.out.println(e.getMessage());
@@ -156,10 +145,49 @@ public class Mascota {
     public static void saveFile(ArrayList<Mascota> mascotas, String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile)))){
             for(Mascota m : mascotas)
-                pw.println(m.id+ "|" +m.idDueño+ "|" + m.nombre + "|" + m.raza + "|" + m.fechaNacimiento + "|" +m.tipo  + "|" + m.dueño + "|");
+                pw.println(m.id+ "|" +m.idDueño+ "|" + m.nombre + "|" + m.raza + "|" + m.fechaNacimiento + "|" +m.tipo);
         }
         catch(Exception e){
         System.out.println(e.getMessage());
         }
+    }
+
+    public static ArrayList<Mascota> readFileMascota(String nomfile){
+        ArrayList<Mascota> mascotas = new ArrayList<>();
+        try(Scanner sc = new Scanner(new File(nomfile))){
+            while(sc.hasNextLine())
+            {
+                String linea = sc.nextLine();
+                String[] tokens = linea.split("\\|");
+                //Mascota mascota = new Mascota(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), tokens[2], tokens[3], tokens[4], tokens[5]);
+                //mascotas.add(mascota);
+                return null;
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return mascotas;        
+    }
+
+    public static Mascota searchByNombre(ArrayList<Mascota> mascotas, String nombre){
+        for(Mascota m: mascotas)
+        {
+            if(m.nombre.equals(nombre))
+                return m; // dar formato
+        }
+        return null;
+    }
+    
+    public static int getIdMascotaSearchedByNombre(String nombre){
+        ArrayList<Mascota> mascotas = readFileMascota("mascotas.txt");
+        Mascota mascota = searchByNombre(mascotas, nombre);
+        return mascota.id;
+    }
+    
+    public static Mascota getDueñoSearchedByNombre(String nombre){
+        ArrayList<Mascota> mascotas = readFileMascota("mascotas.txt");
+        Mascota mascota= searchByNombre(mascotas, nombre);
+        return mascota;
     }    
 }

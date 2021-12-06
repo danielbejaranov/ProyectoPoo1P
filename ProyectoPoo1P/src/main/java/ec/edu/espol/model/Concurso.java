@@ -10,17 +10,26 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Concurso {
+    private int id;
     private String nombre,tematica;
     private Date fechaConcurso,fechaInicio,fechaCierre;
     private double costo;
 
-    public Concurso(String nombre, Date fechaConcurso, Date fechaInicio, Date fechaCierre, String tematica, double costo) {
+    public Concurso(int id, String nombre, Date fechaConcurso, Date fechaInicio, Date fechaCierre, String tematica, double costo) {
         this.nombre = nombre;
         this.fechaConcurso = fechaConcurso;
         this.fechaInicio = fechaInicio;
         this.fechaCierre = fechaCierre;
         this.tematica = tematica;
         this.costo = costo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -112,14 +121,14 @@ public class Concurso {
         String tematica = sc.next();
         System.out.println("Ingrese el costo: ");
         double costo = sc.nextDouble();
-        Concurso concurso = new Concurso(nombre,fechaConcurso,fechaInicio,fechaCierre,tematica,costo);
+        Concurso concurso = new Concurso(id,nombre,fechaConcurso,fechaInicio,fechaCierre,tematica,costo);
         
         concurso.saveFile(nomfile);  
         return concurso;
     }
     public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
-            pw.println(this.nombre + "|" + this.fechaConcurso + "|" + this.fechaInicio + "|" + this.fechaCierre + "|" + this.tematica + "|" + this.costo);
+            pw.println(this.id + "|" + this.nombre + "|" + this.fechaConcurso + "|" + this.fechaInicio + "|" + this.fechaCierre + "|" + this.tematica + "|" + this.costo);
         }
         catch(Exception e){
         System.out.println(e.getMessage());
@@ -128,10 +137,49 @@ public class Concurso {
     public static void saveFile(ArrayList<Concurso> concursos, String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile)))){
             for(Concurso m : concursos)
-                pw.println(m.getNombre()+ "|" + m.getFechaConcurso() + "|" + m.getFechaInicio() + "|" + m.getFechaCierre()+ "|" + m.getTematica()+ "|" + m.getCosto());
+                pw.println(m.getId() + "|" + m.getNombre()+ "|" + m.getFechaConcurso() + "|" + m.getFechaInicio() + "|" + m.getFechaCierre()+ "|" + m.getTematica()+ "|" + m.getCosto());
         }
         catch(Exception e){
         System.out.println(e.getMessage());
         }
     }
+
+    public static ArrayList<Concurso> readFileConcurso(String nomfile){
+        ArrayList<Concurso> concursos = new ArrayList<>();
+        try(Scanner sc = new Scanner(new File(nomfile))){
+            while(sc.hasNextLine())
+            {
+                String linea = sc.nextLine();
+                String[] tokens = linea.split("\\|");
+                //Concurso concurso = new Concurso(Integer.parseInt(tokens[0]), tokens[1], Date.parse(tokens[2]), tokens[3], tokens[4], tokens[5]);
+                //concursos.add(concurso);
+                return null;
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return concursos;        
+    }    
+
+    public static Concurso searchByNombre(ArrayList<Concurso> concursos, String nombre){
+        for(Concurso c: concursos)
+        {
+            if(c.nombre.equals(nombre))
+                return c; // dar formato
+        }
+        return null;
+    }
+    
+    public static int getIdConcursoSearchedByNombre(String nombre){
+        ArrayList<Concurso> concursos = readFileConcurso("concursos.txt");
+        Concurso concurso = searchByNombre(concursos, nombre);
+        return concurso.id;
+    }
+    
+    public static Concurso getConcursoSearchedByNombre(String correo){
+        ArrayList<Concurso> concursos = readFileConcurso("concursos.txt");
+        Concurso concurso = searchByNombre(concursos, correo);
+        return concurso;
+    }    
 }

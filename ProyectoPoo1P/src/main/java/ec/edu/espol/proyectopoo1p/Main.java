@@ -45,12 +45,12 @@ public class Main {
                     
                 case 3:
                     //System.out.println("Concurso");
-                    Concurso concurso = Concurso.nextConcurso(sc, "concursos.txt");
+                    Concurso.nextConcurso(sc, "concursos.txt");
                     break;
                     
                 case 4:
                     System.out.println("Premio");
-                    Premio premio1 = Premio.nextPremio(sc,"premios.txt");
+                    Premio.nextPremio(sc,"premios.txt");
                     break;
                     
                 case 5:
@@ -60,17 +60,17 @@ public class Main {
                     
                 case 6:
                     System.out.println("Inscripcion");
-                    Inscripcion inscripcion1 = Inscripcion.nextInscripcion(sc);
+                    Inscripcion.nextInscripcion(sc, "inscripciones.txt");
                     break;
                     
                 case 7:
                     System.out.println("Miembro del jurado");
-                    MiembroJurado jurado = MiembroJurado.nextMiembroJurado(sc, "miembroJurados.txt");
+                    MiembroJurado.nextMiembroJurado(sc, "miembroJurados.txt");
                     break;
                     
                 case 8:
                     System.out.println("Evaluacion");
-                    //Evaluacion evaluacion1 = Evaluacion.nextCalificacion(sc);
+                    Evaluacion.nextEvaluacion(sc, "evauaciones.txt");
                     break;
                     
                 default:

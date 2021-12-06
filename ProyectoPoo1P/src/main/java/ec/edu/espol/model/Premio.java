@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Premio {
-   private int lugar,id;
+   private int lugar,id, idConcurso;
    private String descripcion;
    
-   public Premio(int id,int lugar,String descripcion){
+   public Premio(int id, int lugar,String descripcion, int idConcurso){
        this.lugar = lugar;
        this.descripcion = descripcion;
    } 
@@ -33,25 +33,44 @@ public class Premio {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-   public static Premio nextPremio (Scanner sc,String nomfile){
-       
-        int id = Util.nextID(nomfile);
-        String correo;
-       
-        //int idDueño = getIdDueñoSearchedByMail(correo);//Hay que generar el mecanismo de ganar, comparando todos los competidores
-        // Luego obtenemos los dueños ganadores, a partir obtenemos el id de cada uno
-        
-        
-        
-        System.out.println("Ingrese el lugar: ");
-        int lugar = sc.nextInt();
-        System.out.println("Ingrese una descripcion: ");
-        String descripcion = sc.next();
-        Premio p1 = new Premio(id,lugar,descripcion);
-        p1.saveFile(nomfile);
-         return p1;
+
+    public int getId() {
+        return id;
     }
-   public void saveFile(String nomfile){
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdConcurso() {
+        return idConcurso;
+    }
+
+    public void setIdConcurso(int idConcurso) {
+        this.idConcurso = idConcurso;
+    }
+    
+    
+    public static ArrayList<Premio> nextPremio (Scanner sc,String nomfile){
+        //NO SÉ CÓMO CONSTRUIR EL PREMIO, LO MISMO SUCEDE CON CRITERIO
+        int id = Util.nextID(nomfile);
+        System.out.println("Ingrese el número de Premios");
+        int numeroPremios = sc.nextInt();
+        ArrayList<Premio> premios = new ArrayList<>();
+        for(int i = 0; i < numeroPremios; i++){
+            System.out.println("Ingrese el lugar: ");
+            int lugar = sc.nextInt();
+            System.out.println("Ingrese una descripcion: ");
+            String descripcion = sc.next();
+            //Premio p1 = new Premio(id,lugar,descripcion);
+            //premios.add(p1);
+            return null;
+        } 
+
+        saveFile(premios,nomfile);
+        return null;
+    }
+    public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
             pw.println(this.id+","+this.lugar + "," + this.descripcion );
         }

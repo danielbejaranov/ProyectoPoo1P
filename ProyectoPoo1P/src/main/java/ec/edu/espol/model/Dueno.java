@@ -14,12 +14,10 @@ import java.util.Scanner;
 
 public class Dueno extends Persona{
     private String direccion;
-    private ArrayList<Mascota> mascotas;
 
     public Dueno(int id, String nombres, String apellidos,String direccion, String telefono, String email) {
         super(id, nombres, apellidos, telefono, email);
         this.direccion = direccion;
-        this.mascotas = new ArrayList<>();
     }
 
     public String getDireccion() {
@@ -29,15 +27,7 @@ public class Dueno extends Persona{
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
-    public ArrayList<Mascota> getMascotas() {
-        return mascotas;
-    }
-
-    public void setMascotas(ArrayList<Mascota> mascotas) {
-        this.mascotas = mascotas;
-    }
-
+    
     public static Dueno nextDueno (Scanner sc, String nomfile){
         System.out.println("Registrar Dueño");
 
@@ -63,7 +53,7 @@ public class Dueno extends Persona{
     
     public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
-            pw.println(this.id + "|" + this.nombres + "|" + this.apellidos + "|" + this.direccion + "|" + this.telefono + "|" + this.email + "|" + this.mascotas);
+            pw.println(this.id + "|" + this.nombres + "|" + this.apellidos + "|" + this.direccion + "|" + this.telefono + "|" + this.email);
         }
         catch(Exception e){
         System.out.println(e.getMessage());
@@ -72,7 +62,7 @@ public class Dueno extends Persona{
     public static void saveFile(ArrayList<Dueno> dueños, String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile)))){
             for(Dueno d : dueños)
-                pw.println(d.id+ "|" + d.nombres+ "|" + d.apellidos + "|" + d.direccion + "|" + d.telefono + "|" + d.email + "|" + d.mascotas);
+                pw.println(d.id+ "|" + d.nombres+ "|" + d.apellidos + "|" + d.direccion + "|" + d.telefono + "|" + d.email);
         }
         catch(Exception e){
         System.out.println(e.getMessage());

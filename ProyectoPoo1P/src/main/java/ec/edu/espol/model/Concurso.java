@@ -122,7 +122,7 @@ public class Concurso {
         System.out.println("Ingrese el costo: ");
         double costo = sc.nextDouble();
         Concurso concurso = new Concurso(id,nombre,fechaConcurso,fechaInicio,fechaCierre,tematica,costo);
-        
+        concurso.setId(id);
         concurso.saveFile(nomfile);  
         return concurso;
     }

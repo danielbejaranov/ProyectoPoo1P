@@ -1,1 +1,3 @@
 1|nick joel|arevalo r|map este|0987654321|narevalo@espol.edu.ec
+2|nick|arevalo|map este|00987654321|narevalo@espol.edu.ec
+3|alex|ope|map oeste|0987654321|alex@epsol.edu.ec

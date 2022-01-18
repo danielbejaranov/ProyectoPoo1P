@@ -1,0 +1,6 @@
+1|0|perrosbien
+1|0|perrosmal
+2|1|erverv
+2|1|erver
+3|2|rverce
+3|2|erver

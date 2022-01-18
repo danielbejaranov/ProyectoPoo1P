@@ -28,6 +28,7 @@ public class Concurso {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
     public Concurso(int id, String nombre, LocalDateTime fechaConcurso, LocalDate fechaInicio, LocalDate fechaCierre, String tematica, double costo) {
+        this.id = id;
         this.nombre = nombre;
         this.fechaConcurso = fechaConcurso;
         this.fechaInicio = fechaInicio;
@@ -91,6 +92,13 @@ public class Concurso {
     public void setCosto(double costo) {
         this.costo = costo;
     }
+
+    @Override
+    public String toString() {
+        return "Concurso{" + "id=" + id + ", nombre=" + nombre + '}';
+    }
+
+
     public static Concurso nextConcurso (Scanner sc, String nomfile){
         System.out.println("Registrar Concurso");
         
@@ -171,7 +179,8 @@ public class Concurso {
               
                     while((linea = bf.readLine()) != null){
                         String[] tokens = linea.split("\\|");//  int id, String nombre, Date fechaConcurso, Date fechaInicio, Date fechaCierre, String tematica, double costo
-                        Concurso p = new Concurso( // 0|perroslokos|Sat Mar 04 23:12:00 EAST 2|Sat Mar 04 00:00:00 EAST 2|Sun Jun 07 00:00:00 EAST 5|perroslokso|23.0
+                        
+                        Concurso p = new Concurso( // 1|perroslokos|Sat Mar 04 23:12:00 EAST 2|Sat Mar 04 00:00:00 EAST 2|Sun Jun 07 00:00:00 EAST 5|perroslokso|23.0
                                 Integer.parseInt(tokens[0]), 
                                 tokens[1],
                                 LocalDateTime.parse(tokens[2]),
@@ -183,6 +192,7 @@ public class Concurso {
                     }
                     bf.close();
                     reader.close();
+                    System.out.println(concursos);
 
                 }catch(IOException | NumberFormatException e ){
                     System.out.println("No se pudo abrir el archivo");
@@ -193,19 +203,20 @@ public class Concurso {
               
 
     public static Concurso searchByNombre(ArrayList<Concurso> concursos, String nombre){
-        for(Concurso c: concursos)
+        for(Concurso c: concursos) //perroslokos
         {
             if(c.nombre.equals(nombre))
-                return c; // dar formato
+                return c; 
         }
         return null;
     }
     
     public static int getIdConcursoSearchedByNombre(String nombre) throws ParseException{
-        ArrayList<Concurso> concursos = readFileConcurso("concursos.txt");
-        Concurso concurso = searchByNombre(concursos, nombre);
-        return concurso.id;
-    }
+            ArrayList<Concurso> concursos = readFileConcurso("concursos.txt");
+            Concurso concurso = searchByNombre(concursos, nombre);
+            System.out.println(concurso.id);
+            return concurso.id;
+        }
     
     public static Concurso getConcursoSearchedByNombre(String correo) throws ParseException{
         ArrayList<Concurso> concursos = readFileConcurso("concursos.txt");

@@ -77,7 +77,7 @@ public class Premio {
         
         System.out.println("Ingrese nombre del concurso: ");
         String nombreConcurso = sc.next();
-        int idConcurso = Concurso.getIdConcursoSearchedByNombre(nombreConcurso); //linea que causa nullpointer exception 
+        int idConcurso = Concurso.getIdConcursoSearchedByNombre(nombreConcurso); 
                 
         for (Premio p : premios)
         {

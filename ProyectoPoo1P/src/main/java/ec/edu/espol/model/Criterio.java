@@ -10,6 +10,7 @@ import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -51,42 +52,44 @@ public class Criterio {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public static void nextCriterio (Scanner sc, String nomfile){
+    public static void nextCriterio (Scanner sc, String nomfile) throws ParseException{
         int id = Util.nextID(nomfile);
         System.out.println("Ingrese cantidad de criterios");
         int numeroCriterios = sc.nextInt();
         ArrayList<Criterio> criterios = new ArrayList<>();
         
-        for(int i = 0; i < numeroCriterios; i++){
-            System.out.println("Ingrese una descripcion: ");
-            String descripcion = sc.next();
-            
-            Criterio c1 = new Criterio(id,descripcion);
-            criterios.add(c1);
-        } 
+            for(int i = 0; i < numeroCriterios; i++){
+                System.out.println("Ingrese una descripcion: ");
+                String descripcion = sc.next();
+
+                Criterio c1 = new Criterio(id,descripcion);
+                criterios.add(c1);
+            } 
         
         System.out.println("Ingrese nombre del concurso: ");
         String nombreConcurso = sc.next();
-        int idConcurso = Concurso.getIdConcursoSearchedByNombre(nombreConcurso);
-                
+        int idConcurso1 = Concurso.getIdConcursoSearchedByNombre(nombreConcurso);
+     
         for (Criterio c : criterios)
         {
-            c.setIdConcurso(id);
+            c.setIdConcurso(idConcurso1);
+            c.setId(id);
         }
         saveFile(criterios,nomfile);
     }
+    
     public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
-            pw.println(this.descripcion );
+            pw.println(this.id+"|"+this.idConcurso+"|"+this.descripcion );
         }
         catch(Exception e){
         System.out.println(e.getMessage());
         }
     }
     public static void saveFile(ArrayList<Criterio> criterios, String nomfile){
-        try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile)))){
+        try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
             for(Criterio m : criterios)
-                pw.println(m.getDescripcion());
+                pw.println(m.id+"|"+m.idConcurso+"|"+m.descripcion );
         }
         catch(Exception e){
         System.out.println(e.getMessage());

@@ -2,20 +2,32 @@
 package ec.edu.espol.model;
 
 import ec.edu.espol.util.Util;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class Concurso {
     private int id;
     private String nombre,tematica;
-    private Date fechaConcurso,fechaInicio,fechaCierre;
+    private LocalDateTime fechaConcurso;
+    private LocalDate fechaCierre,fechaInicio;
     private double costo;
+    
+    String pattern = "yyyy-MM-dd";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-    public Concurso(int id, String nombre, Date fechaConcurso, Date fechaInicio, Date fechaCierre, String tematica, double costo) {
+    public Concurso(int id, String nombre, LocalDateTime fechaConcurso, LocalDate fechaInicio, LocalDate fechaCierre, String tematica, double costo) {
         this.nombre = nombre;
         this.fechaConcurso = fechaConcurso;
         this.fechaInicio = fechaInicio;
@@ -40,27 +52,27 @@ public class Concurso {
         this.nombre = nombre;
     }
 
-    public Date getFechaConcurso() {
+    public LocalDateTime getFechaConcurso() {
         return fechaConcurso;
     }
 
-    public void setFechaConcurso(Date fechaConcurso) {
+    public void setFechaConcurso(LocalDateTime fechaConcurso) {
         this.fechaConcurso = fechaConcurso;
     }
 
-    public Date getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaCierre() {
+    public LocalDate getFechaCierre() {
         return fechaCierre;
     }
 
-    public void setFechaCierre(Date fechaCierre) {
+    public void setFechaCierre(LocalDate fechaCierre) {
         this.fechaCierre = fechaCierre;
     }
 
@@ -85,37 +97,40 @@ public class Concurso {
         int id = Util.nextID(nomfile);                
         System.out.println("Ingrese el nombre del concurso: ");
         String nombre = sc.next();
-        
+           
         System.out.println("Fecha del concurso");
         System.out.println("Ingrese el año del concurso: ");
-        int yearConcurso = sc.nextInt() - 1900;
+        int yearConcurso = sc.nextInt();
         System.out.println("Ingrese el mes del concurso: ");
-        int mesConcurso = sc.nextInt() - 1;
+        int mesConcurso = sc.nextInt();
         System.out.println("Ingrese el día del concurso: ");
         int diaConcurso = sc.nextInt();
         System.out.println("Ingrese hora de inicio del concurso");
         int horaConcurso = sc.nextInt();
         System.out.println("Ingrese minuto de inicio del concurso");
         int minutoConcurso = sc.nextInt();
-        Date fechaConcurso = new Date(yearConcurso, mesConcurso, diaConcurso,horaConcurso,minutoConcurso);
+        LocalDateTime fechaConcurso = LocalDateTime.of(yearConcurso, mesConcurso, diaConcurso, horaConcurso, minutoConcurso);
+       
         
         System.out.println("Ingrese la fecha de inicio de inscripciones ");        
         System.out.println("Ingrese el año del concurso: ");
-        int yearInicio = sc.nextInt() - 1900;
+        int yearInicio = sc.nextInt();
         System.out.println("Ingrese el mes del concurso: ");
-        int mesInicio = sc.nextInt() -1;
+        int mesInicio = sc.nextInt();
         System.out.println("Ingrese el día del concurso: ");
         int diaInicio = sc.nextInt();
-        Date fechaInicio = new Date(yearInicio, mesInicio, diaInicio);        
+        LocalDate fechaInicio = LocalDate.of(yearInicio, mesInicio, diaInicio);        
 
         System.out.println("Ingrese la fecha de cierre de incripciones ");
         System.out.println("Ingrese el año del concurso: ");
-        int yearCierre = sc.nextInt() -1900;
+        int yearCierre = sc.nextInt();
         System.out.println("Ingrese el mes del concurso: ");
-        int mesCierre = sc.nextInt() - 1 ;
+        int mesCierre = sc.nextInt();
         System.out.println("Ingrese el día del concurso: ");
         int diaCierre = sc.nextInt();
-        Date fechaCierre = new Date(yearCierre, mesCierre, diaCierre);
+        LocalDate fechaCierre = LocalDate.of(yearCierre, mesCierre, diaCierre);
+        
+        
         
         System.out.println("Ingrese la tematica: ");
         String tematica = sc.next();
@@ -126,6 +141,7 @@ public class Concurso {
         concurso.saveFile(nomfile);  
         return concurso;
     }
+    
     public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
             pw.println(this.id + "|" + this.nombre + "|" + this.fechaConcurso + "|" + this.fechaInicio + "|" + this.fechaCierre + "|" + this.tematica + "|" + this.costo);
@@ -144,23 +160,37 @@ public class Concurso {
         }
     }
 
-    public static ArrayList<Concurso> readFileConcurso(String nomfile){
+    public static ArrayList<Concurso> readFileConcurso(String nomfile) throws ParseException{
         ArrayList<Concurso> concursos = new ArrayList<>();
-        try(Scanner sc = new Scanner(new File(nomfile))){
-            while(sc.hasNextLine())
-            {
-                String linea = sc.nextLine();
-                String[] tokens = linea.split("\\|");
-                //Concurso concurso = new Concurso(Integer.parseInt(tokens[0]), tokens[1], Date.parse(tokens[2]), tokens[3], tokens[4], tokens[5]);
-                //concursos.add(concurso);
-                return null;
+                        
+                try{
+                    FileReader reader = new FileReader(nomfile);
+                    BufferedReader bf = new BufferedReader(reader);
+                    String linea;
+                    
+              
+                    while((linea = bf.readLine()) != null){
+                        String[] tokens = linea.split("\\|");//  int id, String nombre, Date fechaConcurso, Date fechaInicio, Date fechaCierre, String tematica, double costo
+                        Concurso p = new Concurso( // 0|perroslokos|Sat Mar 04 23:12:00 EAST 2|Sat Mar 04 00:00:00 EAST 2|Sun Jun 07 00:00:00 EAST 5|perroslokso|23.0
+                                Integer.parseInt(tokens[0]), 
+                                tokens[1],
+                                LocalDateTime.parse(tokens[2]),
+                                LocalDate.parse(tokens[3]),
+                                LocalDate.parse(tokens[4]),
+                                tokens[5],
+                                Double.parseDouble(tokens[6]));
+                        concursos.add(p);     
+                    }
+                    bf.close();
+                    reader.close();
+
+                }catch(IOException | NumberFormatException e ){
+                    System.out.println("No se pudo abrir el archivo");
+                }
+                return concursos;
             }
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        return concursos;        
-    }    
+            
+              
 
     public static Concurso searchByNombre(ArrayList<Concurso> concursos, String nombre){
         for(Concurso c: concursos)
@@ -171,13 +201,13 @@ public class Concurso {
         return null;
     }
     
-    public static int getIdConcursoSearchedByNombre(String nombre){
+    public static int getIdConcursoSearchedByNombre(String nombre) throws ParseException{
         ArrayList<Concurso> concursos = readFileConcurso("concursos.txt");
         Concurso concurso = searchByNombre(concursos, nombre);
         return concurso.id;
     }
     
-    public static Concurso getConcursoSearchedByNombre(String correo){
+    public static Concurso getConcursoSearchedByNombre(String correo) throws ParseException{
         ArrayList<Concurso> concursos = readFileConcurso("concursos.txt");
         Concurso concurso = searchByNombre(concursos, correo);
         return concurso;

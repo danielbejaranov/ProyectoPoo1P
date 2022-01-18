@@ -11,6 +11,8 @@ import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -20,10 +22,10 @@ import java.util.Scanner;
 public class Mascota {
     private int id, idDueño;
     private String nombre, raza, tipo;
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private ArrayList<Inscripcion> inscripciones;
 
-    public Mascota(int id, int idDueño, String nombre, String raza, String tipo, Date fechaNacimiento) {
+    public Mascota(int id, int idDueño, String nombre, String raza, String tipo, LocalDate fechaNacimiento) {
         this.id = id;
         this.idDueño = idDueño;
         this.nombre = nombre;
@@ -78,11 +80,11 @@ public class Mascota {
         this.tipo = tipo;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -93,8 +95,6 @@ public class Mascota {
     public void setInscripciones(ArrayList<Inscripcion> inscripciones) {
         this.inscripciones = inscripciones;
     }
-    
-    
     
     public static Mascota nextMascota (Scanner sc, String nomfile){
         System.out.println("Registrar Mascota");
@@ -117,15 +117,15 @@ public class Mascota {
         String tipo = sc.next();
         
         System.out.println("Ingrese el año de nacimiento de su mascota: ");
-        int year = sc.nextInt() - 1900;
+        int year = sc.nextInt();
         
         System.out.println("Ingrese el mes de nacimiento de su mascota: ");
-        int mes = sc.nextInt() - 1;
+        int mes = sc.nextInt() ;
         
         System.out.println("Ingrese el día de nacimiento de su mascota:");
         int dia = sc.nextInt();
         
-        Date fechaNacimiento = new Date(year, mes, dia);
+        LocalDate fechaNacimiento = LocalDate.of(year, mes, dia);
         
         Mascota mascota = new Mascota(id, idDueño, nombre, raza, tipo, fechaNacimiento);
         mascota.saveFile(nomfile);   

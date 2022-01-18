@@ -1,2 +1,1 @@
-0|perroslokos|Sat Mar 04 23:12:00 EAST 2|Sat Mar 04 00:00:00 EAST 2|Sun Jun 07 00:00:00 EAST 5|perroslokso|23.0
-1|bien1|Tue Mar 04 05:06:00 EASST 2003|Sat Mar 04 00:00:00 EAST 2|Sun Jun 07 00:00:00 EAST 5|3|23.0
+1|perroslokos|2003-02-03T12:30|2004-12-04|2004-02-03|perros feos|34.0

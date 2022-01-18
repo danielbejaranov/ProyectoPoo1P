@@ -6,6 +6,7 @@ import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -57,7 +58,7 @@ public class Premio {
     }
     
     
-    public static void nextPremio (Scanner sc,String nomfile){
+    public static void nextPremio (Scanner sc,String nomfile) throws ParseException{
 
         int id = Util.nextID(nomfile);
         System.out.println("Ingrese el número de Premios");
@@ -76,7 +77,7 @@ public class Premio {
         
         System.out.println("Ingrese nombre del concurso: ");
         String nombreConcurso = sc.next();
-        int idConcurso = Concurso.getIdConcursoSearchedByNombre(nombreConcurso);
+        int idConcurso = Concurso.getIdConcursoSearchedByNombre(nombreConcurso); //linea que causa nullpointer exception 
                 
         for (Premio p : premios)
         {

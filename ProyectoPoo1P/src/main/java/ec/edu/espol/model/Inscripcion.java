@@ -8,10 +8,16 @@ package ec.edu.espol.model;
 import static ec.edu.espol.model.Concurso.getIdConcursoSearchedByNombre;
 import static ec.edu.espol.model.Mascota.getIdMascotaSearchedByNombre;
 import ec.edu.espol.util.Util;
+import java.io.BufferedReader;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -22,14 +28,14 @@ public class Inscripcion {
     private Concurso concurso;
     private ArrayList<Evaluacion> evaluaciones;
     private double valor, descuento;
-    private Date fechaInscripcion;
+    private LocalDate fechaInscripcion;
 
     public Inscripcion(double valor) {
         this.valor = valor;
         this.descuento = descuento;
     }
 
-    public Inscripcion(int id, int idMascota, int idConcurso, double valor, Date fechaInscripcion) {
+    public Inscripcion(int id, int idMascota, int idConcurso, double valor, LocalDate fechaInscripcion) {
         this.id = id;
         this.idMascota = idMascota;
         this.idConcurso = idConcurso;
@@ -106,7 +112,7 @@ public class Inscripcion {
         return "Inscripcion{" + "valor=" + valor + ", descuento=" + descuento + '}';
     }
     
-    public static Inscripcion nextInscripcion (Scanner sc, String nomfile){
+    public static Inscripcion nextInscripcion (Scanner sc, String nomfile) throws ParseException{
         int id = Util.nextID(nomfile);
         
         System.out.println("Ingrese el nombre de la mascota: ");
@@ -122,21 +128,23 @@ public class Inscripcion {
         
         System.out.println("Ingrese la fecha de inscripción ");        
         System.out.println("Ingrese el año de inscripción : ");
-        int yearI = sc.nextInt() - 1900;
+        int yearI = sc.nextInt();
         System.out.println("Ingrese el mes de inscripción : ");
-        int mesI = sc.nextInt() -1;
+        int mesI = sc.nextInt();
         System.out.println("Ingrese el día de inscripción : ");
         int diaI = sc.nextInt();
-        Date fechaInscripcion = new Date(yearI, mesI, diaI);        
+      
+        LocalDate fechaInscripcion = LocalDate.of(yearI, mesI, diaI);
                 
         Inscripcion i = new Inscripcion(id, idMascota, idConcurso,valor, fechaInscripcion);
         i.saveFile(nomfile);        
+        i.setId(id);
         return i;
     }
     
     public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
-            pw.println(this.valor + "," + this.descuento );
+            pw.println(this.id+"|"+this.idMascota+"|"+this.idConcurso+"|"+this.valor + "|" + this.descuento );
         }
         catch(Exception e){
         System.out.println(e.getMessage());
@@ -145,7 +153,7 @@ public class Inscripcion {
     public static void saveFile(ArrayList<Inscripcion> inscripcion, String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile)))){
             for(Inscripcion m : inscripcion)
-                pw.println(m.getValor()+ "," + m.getDescuento());
+                pw.println(m.id+"|"+m.idMascota+"|"+m.idConcurso+"|"+m.valor + "|" + m.descuento );
         }
         catch(Exception e){
         System.out.println(e.getMessage());
@@ -153,22 +161,34 @@ public class Inscripcion {
     }
     public static ArrayList<Inscripcion> readFileInscripciones(String nomfile){
         ArrayList<Inscripcion> inscripciones = new ArrayList<>();
-        try(Scanner sc = new Scanner(new File(nomfile))){
-            while(sc.hasNextLine())
-            {
-                String linea = sc.nextLine();
+
+        try{
+            FileReader reader = new FileReader(nomfile);
+            BufferedReader bf = new BufferedReader(reader);
+            String linea;
+
+
+            while((linea = bf.readLine()) != null){
                 String[] tokens = linea.split("\\|");
-                //Inscripcion inscripcion = new Inscripcion(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]), tokens[2], tokens[3], tokens[4], tokens[5], tokens[6]);
-                //                                          (int id, int idMascota, int idConcurso, Mascota mascota, Concurso concurso, ArrayList<Evaluacion> evaluaciones, double valor, double descuento)
-                //inscripciones.add(inscripcion);
+
+                Inscripcion p = new Inscripcion( // int id, int idMascota, int idConcurso, double valor, LocalDate fechaInscripcion
+                        Integer.parseInt(tokens[0]), 
+                        Integer.parseInt(tokens[1]), 
+                        Integer.parseInt(tokens[2]), 
+                        Double.parseDouble(tokens[3]),
+                        LocalDate.parse(tokens[4]));
+                inscripciones.add(p);     
             }
+            bf.close();
+            reader.close();
+
+
+        }catch(IOException | NumberFormatException e ){
+            System.out.println("No se pudo abrir el archivo");
         }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        return null;
-        //return jurados;        
-    }    
+        return inscripciones;
+    }
+    
     public static MiembroJurado searchByCorreo(ArrayList<Inscripcion> inscripciones, String correo){
         for(Inscripcion i: inscripciones)
         {

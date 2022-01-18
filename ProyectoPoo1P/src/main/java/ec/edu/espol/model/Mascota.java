@@ -8,11 +8,15 @@ package ec.edu.espol.model;
 import static ec.edu.espol.model.Dueno.getDueñoSearchedByMail;
 import static ec.edu.espol.model.Dueno.getIdDueñoSearchedByMail;
 import ec.edu.espol.util.Util;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -154,7 +158,7 @@ public class Mascota {
 
     public static ArrayList<Mascota> readFileMascota(String nomfile){
         ArrayList<Mascota> mascotas = new ArrayList<>();
-        try(Scanner sc = new Scanner(new File(nomfile))){
+        /*try(Scanner sc = new Scanner(new File(nomfile))){
             while(sc.hasNextLine())
             {
                 String linea = sc.nextLine();
@@ -168,7 +172,36 @@ public class Mascota {
             System.out.println(e.getMessage());
         }
         return mascotas;        
-    }
+    }*/
+                        try{
+                    FileReader reader = new FileReader(nomfile);
+                    BufferedReader bf = new BufferedReader(reader);
+                    String linea;
+                    
+              
+                    while((linea = bf.readLine()) != null){
+                        String[] tokens = linea.split("\\|");//  int id, int idDueño, String nombre, String raza, String tipo, LocalDate fechaNacimiento
+                        
+                        Mascota p = new Mascota( //1|1|pinki|chihuahua|2004-03-01|perro
+
+                                Integer.parseInt(tokens[0]), 
+                                Integer.parseInt(tokens[1]), 
+                                tokens[2],
+                                tokens[3],
+                                tokens[5],
+                                LocalDate.parse(tokens[4]));
+
+                        mascotas.add(p);     
+                    }
+                    bf.close();
+                    reader.close();
+                   
+
+                }catch(IOException | NumberFormatException e ){
+                    System.out.println("No se pudo abrir el archivo");
+                }
+                return mascotas;
+            }
 
     public static Mascota searchByNombre(ArrayList<Mascota> mascotas, String nombre){
         for(Mascota m: mascotas)

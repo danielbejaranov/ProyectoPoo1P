@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
+
 public class Evaluacion {
     private int id, idInscripcion, idCriterio, idMiembroJurado;
     private Inscripcion inscripcion;

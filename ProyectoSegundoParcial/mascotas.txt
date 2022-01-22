@@ -1,2 +1,0 @@
-1|2|Juan|Bulldog|2017-12-25|perro
-2|1|Tequila|Siames|2017-01-17|gato

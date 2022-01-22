@@ -5,7 +5,9 @@
  */
 package ec.edu.espol.controllers;
 
+import ec.edu.espol.model.Criterio;
 import ec.edu.espol.proyectosegundoparcial.App;
+import ec.edu.espol.util.Util;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,6 +30,8 @@ public class InterfazCriterioController implements Initializable {
     private Button btnRegresar;
     @FXML
     private TextArea txtDescripcion;
+    private int id,idConcurso;
+    private String descripcion;
 
     /**
      * Initializes the controller class.
@@ -39,6 +43,11 @@ public class InterfazCriterioController implements Initializable {
 
     @FXML
     private void Enviar(ActionEvent event) {
+        id = Util.nextID("criterios.txt");
+        descripcion = txtDescripcion.getText();
+        Criterio c = new Criterio(descripcion,id,idConcurso);
+        c.saveFile("criterios.txt");
+        txtDescripcion.clear();   
     }
 
     @FXML

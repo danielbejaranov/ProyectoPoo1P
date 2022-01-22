@@ -1,0 +1,3 @@
+2|Nick|Arevalo|Su casa|198815456|nickarevalo@espol.edu.ec
+1|Sebastian|Arguello|Ciudad Celeste|0988485071|sebaescu@espol.edu.ec
+

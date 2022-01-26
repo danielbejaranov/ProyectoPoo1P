@@ -10,6 +10,7 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 
 /**
  * JavaFX App
@@ -21,7 +22,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("Interfaz"));
-        stage.setTitle("Menu");
+        stage.getIcons().add(new Image("ec/edu/espol/icons/icono.jpg"));
+        stage.setTitle("Concurso");
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(event -> {

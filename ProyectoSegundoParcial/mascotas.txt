@@ -1,2 +1,6 @@
 1|2|Juan|Bulldog|2017-12-25|perro
 2|1|Tequila|Siames|2017-01-17|gato
+3|2|Pinki|Chihuahua|2001-06-08|Perro
+4|2|arg|serbg|2012-05-04|sereb
+5|2|wef|wef|null|we
+6|2|ere|wefw|2001-03-02|wefw

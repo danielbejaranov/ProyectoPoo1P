@@ -46,5 +46,6 @@
             <Font name="Courier New" size="14.0" />
          </font>
       </Label>
+      <Button fx:id="imgMascota" layoutX="436.0" layoutY="172.0" mnemonicParsing="false" text="Foto mascota" />
    </children>
 </AnchorPane>

@@ -6,20 +6,29 @@
 package ec.edu.espol.controllers;
 
 import ec.edu.espol.model.Dueno;
+import ec.edu.espol.model.FileChooserMascota;
 import ec.edu.espol.model.Mascota;
 import ec.edu.espol.proyectosegundoparcial.App;
 import ec.edu.espol.util.Util;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -28,6 +37,8 @@ import javafx.scene.control.TextField;
  */
 public class InterfazMascotaController implements Initializable {
 
+    @FXML
+    private Button imgMascota;
     @FXML
     private TextField txtNombres;
     @FXML
@@ -96,7 +107,9 @@ public class InterfazMascotaController implements Initializable {
         lblMes.setVisible(false);
         lblAno.setVisible(false);
         lblFecha.setVisible(false);
+        imgMascota.setVisible(false);
         duenos = Dueno.readFileDueño("duenos.txt");
+        
     }    
 
     @FXML
@@ -158,7 +171,18 @@ public class InterfazMascotaController implements Initializable {
             btnVerificar.setVisible(false);
             btnEnviar.setVisible(true);
             idDueno = d.getId();
+            imgMascota.setVisible(true);
+            imgMascota.setOnAction(e -> 
+            {
+                FileChooserMascota fc = new FileChooserMascota();
+                Stage s1 =  new Stage();
+                try {
+                    fc.start(s1);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                
+            });
         }
-    }
-    
+    }  
 }

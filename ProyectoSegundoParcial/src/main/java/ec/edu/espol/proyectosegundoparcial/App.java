@@ -22,7 +22,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("Interfaz"));
-        stage.getIcons().add(new Image("ec/edu/espol/icons/icono.jpg"));
+        stage.getIcons().add(new Image("icons/icono.jpg"));
         stage.setTitle("Concurso");
         stage.setScene(scene);
         stage.show();

@@ -54,6 +54,7 @@ public class InterfazMascotaController implements Initializable {
     private String nombre,raza,tipo;
     private LocalDate fechaNacimiento;
     private int id, idDueno,ano,mes,dia;
+    
     private ArrayList<Dueno> duenos;
     @FXML
     private Label lblNombre;
@@ -115,29 +116,37 @@ public class InterfazMascotaController implements Initializable {
     @FXML
     private void Enviar(ActionEvent event) {
         
-        id = Util.nextID("mascotas.txt");
-        nombre = txtNombres.getText();
-        raza = txtRaza.getText();
-        tipo = txtTipo.getText();
-        dia = Integer.parseInt(txtDia.getText());
-        mes = Integer.parseInt(txtMes.getText());
-        ano = Integer.parseInt(txtAno.getText());
-        fechaNacimiento = LocalDate.of(ano, mes, dia); //Al crear una mascota lanza un error, estoy seguro que es por LocalDate, corrigelo xd
+        int id = Util.nextID("mascotas.txt");
+        String nombre = txtNombres.getText();
+        String raza = txtRaza.getText();
+        String tipo = txtTipo.getText();
+        dia = Integer.valueOf(txtDia.getText());
+        mes = Integer.valueOf(txtMes.getText());
+        ano = Integer.valueOf(txtAno.getText());
+        fechaNacimiento = LocalDate.of(ano, mes, dia);
         Mascota m1 = new Mascota(id,idDueno,nombre,raza,tipo,fechaNacimiento);
         m1.saveFile("mascotas.txt");
         
-        //d1.agregarDueno(d1, duenos);
+        
         
         txtNombres.clear();
         txtRaza.clear();
         txtTipo.clear();
-        txtFecha.clear();
         txtDia.clear();
         txtMes.clear();
         txtAno.clear();
         lbl1.setVisible(true);
         lbl2.setVisible(true);
     }
+
+    public InterfazMascotaController() {
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+    
+    
 
     @FXML
     private void regresarMenu(ActionEvent event) throws IOException {
@@ -170,7 +179,7 @@ public class InterfazMascotaController implements Initializable {
             lblFecha.setVisible(true);
             btnVerificar.setVisible(false);
             btnEnviar.setVisible(true);
-            idDueno = d.getId();
+            this.idDueno = d.getId();
             imgMascota.setVisible(true);
             imgMascota.setOnAction(e -> 
             {

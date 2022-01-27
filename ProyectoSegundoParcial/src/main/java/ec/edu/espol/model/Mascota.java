@@ -34,6 +34,10 @@ public class Mascota {
         this.fechaNacimiento = fechaNacimiento;
         this.inscripciones = new ArrayList();
     }
+    
+    public Mascota(){
+        
+    }
 
     @Override
     public String toString() {
@@ -127,6 +131,7 @@ public class Mascota {
         
         LocalDate fechaNacimiento = LocalDate.of(year, mes, dia);
         
+        
         Mascota mascota = new Mascota(id, idDueño, nombre, raza, tipo, fechaNacimiento);
         mascota.saveFile(nomfile);   
         
@@ -154,21 +159,6 @@ public class Mascota {
 
     public static ArrayList<Mascota> readFileMascota(String nomfile){
         ArrayList<Mascota> mascotas = new ArrayList<>();
-        /*try(Scanner sc = new Scanner(new File(nomfile))){
-            while(sc.hasNextLine())
-            {
-                String linea = sc.nextLine();
-                String[] tokens = linea.split("\\|");
-                //Mascota mascota = new Mascota(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), tokens[2], tokens[3], tokens[4], tokens[5]);
-                //mascotas.add(mascota);
-                return null;
-            }
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        return mascotas;        
-    }*/
                         try{
                     FileReader reader = new FileReader(nomfile);
                     BufferedReader bf = new BufferedReader(reader);

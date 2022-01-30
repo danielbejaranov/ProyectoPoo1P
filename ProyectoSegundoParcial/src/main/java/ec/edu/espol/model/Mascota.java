@@ -7,11 +7,10 @@ package ec.edu.espol.model;
 
 import ec.edu.espol.util.Util;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -36,15 +35,16 @@ public class Mascota extends Application{
         this.fechaNacimiento = fechaNacimiento;
         this.inscripciones = new ArrayList();
     }
-    
-    public Mascota(){
-        
-    }
 
     @Override
     public String toString() {
         return "Mascota{" + "nombre=" + nombre + ", raza=" + raza + ", tipo=" + tipo + ", fechaNacimiento=" + fechaNacimiento + '}';
     }
+
+    public Mascota() {
+    }
+    
+    
 
     public int getId() {
         return id;
@@ -141,61 +141,67 @@ public class Mascota extends Application{
     }
 
     public void saveFile(String nomfile){
-        try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
-            pw.println(this.id + "|" + this.idDueño + "|" + this.nombre + "|" + this.raza + "|" +  this.fechaNacimiento + "|" + this.tipo);
-        }
-        catch(Exception e){
-        System.out.println(e.getMessage());
-        }
+        StringBuilder sb = new StringBuilder();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomfile, true))) {
+            
+            sb.append(this.id).append("|");
+            sb.append(this.idDueño).append("|");
+            sb.append(this.nombre).append("|");
+            sb.append(this.raza).append("|");
+            sb.append(this.tipo).append("|");
+            sb.append(this.fechaNacimiento).append("|");
+ 
+            
+            bw.write(sb.toString());
+        } catch (IOException e) {
+            System.out.println(e);
+        }        
+        
     }
   
     public static void saveFile(ArrayList<Mascota> mascotas, String nomfile){
-        try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile)))){
-            for(Mascota m : mascotas)
-                pw.println(m.id+ "|" +m.idDueño+ "|" + m.nombre + "|" + m.raza + "|" + m.fechaNacimiento + "|" +m.tipo);
-        }
-        catch(Exception e){
-        System.out.println(e.getMessage());
+        StringBuilder sb = new StringBuilder();        
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomfile))) {            
+            for (Mascota m : mascotas) {
+            sb.append(m.id).append("|");
+            sb.append(m.idDueño).append("|");
+            sb.append(m.nombre).append("|");
+            sb.append(m.raza).append("|");
+            sb.append(m.tipo).append("|");
+            sb.append(m.fechaNacimiento).append("|");               
+            }
+            bw.write(sb.toString());
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 
     public static ArrayList<Mascota> readFileMascota(String nomfile){
         ArrayList<Mascota> mascotas = new ArrayList<>();
-                        try{
-                    FileReader reader = new FileReader(nomfile);
-                    BufferedReader bf = new BufferedReader(reader);
-                    String linea;
-                    
-              
-                    while((linea = bf.readLine()) != null){
-                        String[] tokens = linea.split("\\|");//  int id, int idDueño, String nombre, String raza, String tipo, LocalDate fechaNacimiento
-                        
-                        Mascota p = new Mascota( //1|1|pinki|chihuahua|2004-03-01|perro
-
-                                Integer.parseInt(tokens[0]), 
+        try (BufferedReader bw = new BufferedReader(new FileReader(nomfile))) {
+            String linea;
+            while ((linea = bw.readLine()) != null) {
+                String [] tokens = linea.split("|");
+                Mascota m = new Mascota(
+                                Integer.parseInt(tokens[0]),
                                 Integer.parseInt(tokens[1]), 
                                 tokens[2],
                                 tokens[3],
                                 tokens[5],
-                                LocalDate.parse(tokens[4]));
-
-                        mascotas.add(p);     
-                    }
-                    bf.close();
-                    reader.close();
-                   
-
-                }catch(IOException | NumberFormatException e ){
-                    System.out.println("No se pudo abrir el archivo");
-                }
-                return mascotas;
+                                LocalDate.parse(tokens[4]));                                                                                
+                mascotas.add(m);
             }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return mascotas; 
+    }
 
     public static Mascota searchByNombre(ArrayList<Mascota> mascotas, String nombre){
         for(Mascota m: mascotas)
         {
             if(m.nombre.equals(nombre))
-                return m; // dar formato
+                return m;
         }
         return null;
     }
@@ -211,6 +217,7 @@ public class Mascota extends Application{
         Mascota mascota= searchByNombre(mascotas, nombre);
         return mascota;
     }
+
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -223,3 +230,6 @@ public class Mascota extends Application{
     }
 
 }
+
+
+

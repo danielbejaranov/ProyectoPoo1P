@@ -55,7 +55,7 @@ public class InterfazCriterioController implements Initializable {
         idConcurso = Concurso.getConcursoSearchedByNombre(concurso).getId();
         
         descripcion = txtDescripcion.getText();
-        Criterio c = new Criterio(descripcion,id,idConcurso);
+        Criterio c = new Criterio(id,idConcurso,descripcion);
         c.saveFile("criterios.txt");
         txtDescripcion.clear();   
     }

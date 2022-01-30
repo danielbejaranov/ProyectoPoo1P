@@ -1,7 +1,6 @@
 
 package ec.edu.espol.model;
 
-import ec.edu.espol.util.Util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -10,9 +9,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Concurso {
     private int id;

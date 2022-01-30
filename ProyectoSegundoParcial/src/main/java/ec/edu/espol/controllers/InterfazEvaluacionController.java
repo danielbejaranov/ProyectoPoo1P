@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 /**
@@ -32,6 +33,12 @@ public class InterfazEvaluacionController implements Initializable {
     private Button btnRegresar;
     private int id,idInscripcion,idCriterio,idMiembroJurado;
     private double nota;
+    @FXML
+    private ComboBox<?> cbJurado;
+    @FXML
+    private ComboBox<?> cbDueno;
+    @FXML
+    private ComboBox<?> cbMascota;
 
     /**
      * Initializes the controller class.
@@ -40,9 +47,9 @@ public class InterfazEvaluacionController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+//INTEGRAR LAS LISTAS, TODOS LOS MÉTODOS SE ENCUENTRAN EN LA CLASE EVALUACION
     @FXML
-    private void Enviar(ActionEvent event) {
+    private void Enviar(ActionEvent event) {//CORREGIR
         id = Util.nextID("evaluaciones.txt");
         nota = Double.parseDouble(txtNota.getText());
         Evaluacion ev = new Evaluacion(id,idInscripcion,idCriterio,idMiembroJurado,nota);

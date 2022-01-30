@@ -5,20 +5,18 @@
  */
 package ec.edu.espol.model;
 
-import ec.edu.espol.util.Util;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class Evaluacion {
     private int id, idInscripcion, idCriterio, idMiembroJurado;
-    private Inscripcion inscripcion;
-    private MiembroJurado miembroJurado;
     private double nota;
-    private Criterio criterio;
 
     public Evaluacion(int id, int idInscripcion, int idCriterio, int idMiembroJurado, double nota) {
         this.id = id;
@@ -60,22 +58,6 @@ public class Evaluacion {
         this.idMiembroJurado = idMiembroJurado;
     }
 
-    public Inscripcion getInscripcion() {
-        return inscripcion;
-    }
-
-    public void setInscripcion(Inscripcion inscripcion) {
-        this.inscripcion = inscripcion;
-    }
-
-    public MiembroJurado getMiembroJurado() {
-        return miembroJurado;
-    }
-
-    public void setMiembroJurado(MiembroJurado miembroJurado) {
-        this.miembroJurado = miembroJurado;
-    }
-
     public double getNota() {
         return nota;
     }
@@ -84,26 +66,27 @@ public class Evaluacion {
         this.nota = nota;
     }
 
-    public Criterio getCriterio() {
-        return criterio;
-    }
-
-    public void setCriterio(Criterio criterio) {
-        this.criterio = criterio;
-    }
-
     @Override
     public String toString() {
-        return "Evaluacion{" + "nota=" + nota + '}';
+        return "Evaluacion{" + "id=" + id + ", idInscripcion=" + idInscripcion + ", idCriterio=" + idCriterio + ", idMiembroJurado=" + idMiembroJurado + ", nota=" + nota + '}';
     }
+
     
     public void saveFile(String nomfile){
-        try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
-            pw.println(this.nota );
-        }
-        catch(Exception e){
-        System.out.println(e.getMessage());
-        }
+        StringBuilder sb = new StringBuilder();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomfile, true))) {
+            
+            sb.append(this.id).append("|");
+            sb.append(this.idInscripcion).append("|");
+            sb.append(this.idCriterio).append("|");
+            sb.append(this.idMiembroJurado).append("|");
+            sb.append(this.nota);
+            
+            bw.write(sb.toString());
+        } catch (IOException e) {
+            System.out.println(e);
+        }         
+
     }
     public static void saveFile(ArrayList<Evaluacion> evaluaciones, String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile)))){

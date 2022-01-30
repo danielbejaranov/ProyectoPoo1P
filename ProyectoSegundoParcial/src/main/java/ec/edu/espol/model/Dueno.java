@@ -80,8 +80,7 @@ public class Dueno extends Persona{
                                 tokens[3], 
                                 tokens[4], 
                                 tokens[5]);
-                dueños.add(dueño);
-            }
+                dueños.add(dueño);}
         } catch (Exception e) {
             System.out.println(e);
         }

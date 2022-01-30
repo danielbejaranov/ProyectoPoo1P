@@ -21,8 +21,6 @@ import java.util.Scanner;
 
 public class Inscripcion {
     private int id, idMascota, idConcurso;
-    private Mascota mascota;
-    private Concurso concurso;
     private ArrayList<Evaluacion> evaluaciones;
     private double valor, descuento;
     private LocalDate fechaInscripcion;
@@ -62,22 +60,6 @@ public class Inscripcion {
 
     public void setIdConcurso(int idConcurso) {
         this.idConcurso = idConcurso;
-    }
-
-    public Mascota getMascota() {
-        return mascota;
-    }
-
-    public void setMascota(Mascota mascota) {
-        this.mascota = mascota;
-    }
-
-    public Concurso getConcurso() {
-        return concurso;
-    }
-
-    public void setConcurso(Concurso concurso) {
-        this.concurso = concurso;
     }
 
     public ArrayList<Evaluacion> getEvaluaciones() {
@@ -185,25 +167,5 @@ public class Inscripcion {
         }
         return inscripciones;
     }
-    
-    public static MiembroJurado searchByCorreo(ArrayList<Inscripcion> inscripciones, String correo){
-        for(Inscripcion i: inscripciones)
-        {
-            //if(i.email.equals(correo))
-                //return i;
-        }
-        return null;
-    }
-    
-    public static int getIdDueñoSearchedByMail(String correo){
-        ArrayList<Inscripcion> inscripciones = readFileInscripciones("miembroJurados.txt");
-        MiembroJurado jurado = searchByCorreo(inscripciones, correo);
-        return jurado.id;
-    }
-    
-    public static MiembroJurado getDueñoSearchedByMail(String correo){
-        ArrayList<Inscripcion> inscripciones = readFileInscripciones("miembroJurados.txt");
-        MiembroJurado jurado = searchByCorreo(inscripciones, correo);
-        return jurado;
-    }    
+        
 }

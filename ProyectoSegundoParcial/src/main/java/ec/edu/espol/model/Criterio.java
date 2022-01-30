@@ -5,27 +5,25 @@
  */
 package ec.edu.espol.model;
 
-import ec.edu.espol.util.Util;
+import static ec.edu.espol.model.Concurso.readFileConcurso;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Criterio {
 
     private String descripcion;
     private int id, idConcurso;
 
-    public Criterio(int id, String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Criterio(String descripcion, int id, int idConcurso) {
-        this.descripcion = descripcion;
+    public Criterio(int id, int idConcurso, String descripcion) {
         this.id = id;
         this.idConcurso = idConcurso;
+        this.descripcion = descripcion;        
     }
 
     public int getId() {
@@ -81,4 +79,37 @@ public class Criterio {
             System.out.println(e);
         }        
     }
+    
+    public static ArrayList<Criterio> readFileConcurso(String nomfile) {
+        ArrayList<Criterio> criterios = new ArrayList<>();
+        try (BufferedReader bw = new BufferedReader(new FileReader(nomfile))) {
+            String linea;
+            while ((linea = bw.readLine()) != null) {
+                String [] tokens = linea.split("|");
+                Criterio c = new Criterio(
+                                Integer.parseInt(tokens[0]), 
+                                Integer.parseInt(tokens[1]),
+                                tokens[2]);                      
+                criterios.add(c);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return criterios;        
+    }
+
+    public static Criterio searchByDescripcion(ArrayList<Criterio> criterios, String descripcion){
+        for(Criterio c: criterios)
+        {
+            if(c.descripcion.equals(descripcion))
+                return c; 
+        }
+        return null;
+    }
+    
+    public static Criterio getConcursoSearchedByDescripcion(String descripcion) throws ParseException{
+        ArrayList<Criterio> criterios = readFileConcurso("criterios.txt");
+        Criterio criterio = searchByDescripcion(criterios, descripcion);
+        return criterio;
+    }    
 }

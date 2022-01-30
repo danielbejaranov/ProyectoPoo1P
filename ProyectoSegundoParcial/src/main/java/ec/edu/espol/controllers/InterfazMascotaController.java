@@ -6,13 +6,18 @@
 package ec.edu.espol.controllers;
 
 import ec.edu.espol.model.Dueno;
-import ec.edu.espol.model.FileChooserMascota;
+
 import ec.edu.espol.model.Mascota;
 import ec.edu.espol.proyectosegundoparcial.App;
 import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -181,16 +186,42 @@ public class InterfazMascotaController implements Initializable {
             btnEnviar.setVisible(true);
             this.idDueno = d.getId();
             imgMascota.setVisible(true);
-            imgMascota.setOnAction(e -> 
-            {
-                FileChooserMascota fc = new FileChooserMascota();
-                Stage s1 =  new Stage();
+            imgMascota.setOnAction(e
+                    -> {
+
+                Mascota mascota = new Mascota();
+                FileChooser fil_chooser = new FileChooser();
+                fil_chooser.setInitialDirectory(new File(System.getProperty("user.home") + "\\Pictures"));
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("IMG files (*.jpg)", "*.jpg");
+                FileChooser.ExtensionFilter extFilter2 = new FileChooser.ExtensionFilter("IMG files (*.png)", "*.png");
+                fil_chooser.getExtensionFilters().add(extFilter);
+                fil_chooser.getExtensionFilters().add(extFilter2);
+                File file = fil_chooser.showOpenDialog(null);
+                  
+                Path a = Paths.get("src/main/resources/img/"+file.getName());
+                
+                
+                Path de = Paths.get(file.toURI());
+                
+                CopyOption[] options = new CopyOption[]{
+                StandardCopyOption.REPLACE_EXISTING,
+                StandardCopyOption.COPY_ATTRIBUTES
+                };
+                
                 try {
-                    fc.start(s1);
+                    
+                    Files.copy(de, a ,options );
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+                Stage s1 = new Stage();
+                try {
+                    mascota.start(s1);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-                
+
             });
         }
     }  

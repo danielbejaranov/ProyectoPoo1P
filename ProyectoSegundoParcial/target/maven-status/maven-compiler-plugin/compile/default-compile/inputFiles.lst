@@ -1,22 +1,21 @@
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\Premio.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\Dueno.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazEvaluacionController.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazCriterioController.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\Concurso.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\Mascota.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\MiembroJurado.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazConcursoController.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\proyectosegundoparcial\App.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\FileChooserMascota.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\util\Util.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\module-info.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazMiembroJuradoController.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\Persona.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazPremioController.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\Evaluacion.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazInscripcionController.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\Criterio.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazController.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazMascotaController.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazDueñoController.java
-D:\OneDrive - Escuela Superior Politécnica del Litoral\Daniel 1.0\Daniel 2.0\ESPOL\CUARTO SEMESTRE\POO\2P\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\Inscripcion.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazDueñoController.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\Concurso.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\MiembroJurado.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazMascotaController.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazEvaluacionController.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\Premio.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\proyectosegundoparcial\App.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazConcursoController.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazInscripcionController.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\Inscripcion.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\util\Util.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\module-info.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazCriterioController.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\Mascota.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazMiembroJuradoController.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\Evaluacion.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\Persona.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\Dueno.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazPremioController.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\controllers\InterfazController.java
+C:\Users\nick1\Documents\NetBeansProjects\ProyectoPoo1P\ProyectoSegundoParcial\src\main\java\ec\edu\espol\model\Criterio.java

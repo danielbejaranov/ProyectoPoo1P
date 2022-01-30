@@ -15,10 +15,13 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.stage.Stage;
 
 
 
-public class Mascota {
+public class Mascota extends Application{
     private int id, idDueño;
     private String nombre, raza, tipo;
     private LocalDate fechaNacimiento;
@@ -207,6 +210,16 @@ public class Mascota {
         ArrayList<Mascota> mascotas = readFileMascota("mascotas.txt");
         Mascota mascota= searchByNombre(mascotas, nombre);
         return mascota;
+    }
+    
+    @Override
+    public void start(Stage stage) throws Exception {
+
+
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 
 }

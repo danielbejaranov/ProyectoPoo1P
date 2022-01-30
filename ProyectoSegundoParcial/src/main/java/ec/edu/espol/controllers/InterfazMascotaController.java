@@ -55,11 +55,11 @@ public class InterfazMascotaController implements Initializable {
     @FXML
     private TextField txtTipo;
     private TextField txtFecha;
-    
-    private String nombre,raza,tipo;
+
+    private String nombre, raza, tipo;
     private LocalDate fechaNacimiento;
-    private int id, idDueno,ano,mes,dia;
-    
+    private int idImagen, idDueno, ano, mes, dia;
+
     private ArrayList<Dueno> duenos;
     @FXML
     private Label lblNombre;
@@ -115,13 +115,14 @@ public class InterfazMascotaController implements Initializable {
         lblFecha.setVisible(false);
         imgMascota.setVisible(false);
         duenos = Dueno.readFileDueño("duenos.txt");
-        
-    }    
+
+    }
 
     @FXML
     private void Enviar(ActionEvent event) {
-        
+
         int id = Util.nextID("mascotas.txt");
+        idImagen = id;
         String nombre = txtNombres.getText();
         String raza = txtRaza.getText();
         String tipo = txtTipo.getText();
@@ -129,11 +130,9 @@ public class InterfazMascotaController implements Initializable {
         mes = Integer.valueOf(txtMes.getText());
         ano = Integer.valueOf(txtAno.getText());
         fechaNacimiento = LocalDate.of(ano, mes, dia);
-        Mascota m1 = new Mascota(id,idDueno,nombre,raza,tipo,fechaNacimiento);
+        Mascota m1 = new Mascota(id, idDueno, nombre, raza, tipo, fechaNacimiento);
         m1.saveFile("mascotas.txt");
-        
-        
-        
+
         txtNombres.clear();
         txtRaza.clear();
         txtTipo.clear();
@@ -142,6 +141,7 @@ public class InterfazMascotaController implements Initializable {
         txtAno.clear();
         lbl1.setVisible(true);
         lbl2.setVisible(true);
+        imgMascota.setVisible(true);
     }
 
     public InterfazMascotaController() {
@@ -150,8 +150,17 @@ public class InterfazMascotaController implements Initializable {
     public String getNombre() {
         return nombre;
     }
-    
-    
+
+    public static String getExtension(String filename) {
+        String extension = "";
+
+        int i = filename.lastIndexOf('.');
+        if (i
+                > 0) {
+            extension = filename.substring(i + 1);
+        }
+        return extension;
+    }
 
     @FXML
     private void regresarMenu(ActionEvent event) throws IOException {
@@ -161,12 +170,9 @@ public class InterfazMascotaController implements Initializable {
     @FXML
     private void Verificar(ActionEvent event) {
         Dueno d = Dueno.searchByCorreo(duenos, txtCorreo.getText());
-        if(d == null)
-        {
-            txtCorreo.clear();    
-        }
-        else
-        {
+        if (d == null) {
+            txtCorreo.clear();
+        } else {
             lblDueno.setVisible(false);
             txtCorreo.setVisible(false);
             txtNombres.setVisible(true);
@@ -185,7 +191,7 @@ public class InterfazMascotaController implements Initializable {
             btnVerificar.setVisible(false);
             btnEnviar.setVisible(true);
             this.idDueno = d.getId();
-            imgMascota.setVisible(true);
+
             imgMascota.setOnAction(e
                     -> {
 
@@ -197,20 +203,21 @@ public class InterfazMascotaController implements Initializable {
                 fil_chooser.getExtensionFilters().add(extFilter);
                 fil_chooser.getExtensionFilters().add(extFilter2);
                 File file = fil_chooser.showOpenDialog(null);
-                  
-                Path a = Paths.get("src/main/resources/img/"+file.getName());
                 
+                String extension = InterfazMascotaController.getExtension(file.getName());
                 
+                Path a = Paths.get("src/main/resources/img/" + this.idImagen+"."+extension);
+
                 Path de = Paths.get(file.toURI());
-                
+
                 CopyOption[] options = new CopyOption[]{
-                StandardCopyOption.REPLACE_EXISTING,
-                StandardCopyOption.COPY_ATTRIBUTES
+                    StandardCopyOption.REPLACE_EXISTING,
+                    StandardCopyOption.COPY_ATTRIBUTES
                 };
-                
+
                 try {
-                    
-                    Files.copy(de, a ,options );
+
+                    Files.copy(de, a, options);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -224,5 +231,5 @@ public class InterfazMascotaController implements Initializable {
 
             });
         }
-    }  
+    }
 }

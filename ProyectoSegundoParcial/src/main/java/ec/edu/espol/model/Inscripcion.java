@@ -5,7 +5,6 @@
  */
 package ec.edu.espol.model;
 
-import static ec.edu.espol.model.Concurso.getIdConcursoSearchedByNombre;
 import static ec.edu.espol.model.Mascota.getIdMascotaSearchedByNombre;
 import ec.edu.espol.util.Util;
 import java.io.BufferedReader;
@@ -119,7 +118,7 @@ public class Inscripcion {
         
         System.out.println("Ingrese el nombre del concurso: ");
         String nombreConcurso = sc.next();
-        int idConcurso = getIdConcursoSearchedByNombre(nombreConcurso);
+        int idConcurso = Concurso.getConcursoSearchedByNombre(nombreConcurso).getId();
         
         System.out.println("Ingrese el valor: ");
         double valor = sc.nextDouble();

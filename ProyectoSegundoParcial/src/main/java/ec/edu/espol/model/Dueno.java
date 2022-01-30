@@ -6,9 +6,14 @@
 package ec.edu.espol.model;
 
 import ec.edu.espol.util.Util;
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileOutputStream;
-import java.io.PrintWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,74 +32,58 @@ public class Dueno extends Persona{
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
-    public static Dueno nextDueno (Scanner sc, String nomfile){
-        System.out.println("Registrar Dueño");
-
-        int id = Util.nextID(nomfile);        
-        System.out.println("Ingrese sus nombres: ");
-        String nombres = sc.next();
-        System.out.println("Ingrese sus apellidos: ");
-        String apellidos = sc.next();
-        System.out.println("Ingrese su direccion: ");
-        String direccion = sc.next();
-        System.out.println("Ingrese su telefono: ");
-        String telefono = sc.next();
-        System.out.println("Ingrese su correo: ");
-        String email = sc.next();
-
-        Dueno personaDueño = new Dueno(id,nombres,apellidos,direccion,telefono,email);
-        personaDueño.saveFile(nomfile);
-        return personaDueño;
-    }
     
     public void saveFile(String nomfile){
-        try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
-            pw.println(this.id + "|" + this.nombres + "|" + this.apellidos + "|" + this.direccion + "|" + this.telefono + "|" + this.email);
-        }
-        catch(Exception e){
-        System.out.println(e.getMessage());
-        }
+        StringBuilder sb = new StringBuilder();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomfile, true))) {
+
+            sb.append(this.id).append("|");
+            sb.append(this.nombres).append("|");
+            sb.append(this.apellidos).append("|");
+            sb.append(this.direccion).append("|");
+            sb.append(this.telefono).append("|");
+            sb.append(this.email);
+
+            bw.write(sb.toString());
+        } catch (IOException e) {
+            System.out.println(e);
+        }        
     }
+    
     public static void saveFile(ArrayList<Dueno> dueños, String nomfile){
-        try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile)))){
-            for(Dueno d : dueños)
-                pw.println(d.id+ "|" + d.nombres+ "|" + d.apellidos + "|" + d.direccion + "|" + d.telefono + "|" + d.email);
-        }
-        catch(Exception e){
-        System.out.println(e.getMessage());
+        StringBuilder sb = new StringBuilder();        
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomfile))) {            
+            for (Dueno d : dueños) {
+                sb.append(d.id).append("|");
+                sb.append(d.nombres).append("|");
+                sb.append(d.apellidos).append("|");
+                sb.append(d.direccion).append("|");
+                sb.append(d.telefono).append("|");
+                sb.append(d.email);            
+            }
+            bw.write(sb.toString());
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
-    public void agregarDueno(ArrayList<Dueno> duenos,Dueno dueno)
-    {   
-        String correo1,correo2;
-        for (Dueno d: duenos)
-        {
-            correo1 = d.getEmail();
-            correo2 = dueno.getEmail();
-            if (correo1 == correo2)
-            {
-                System.out.println("El dueño ya existe");
-            }
-            else
-            {
-                duenos.add(dueno); 
-            }
-        }    
-    }
+    
     public static ArrayList<Dueno> readFileDueño(String nomfile){
         ArrayList<Dueno> dueños = new ArrayList<>();
-        try(Scanner sc = new Scanner(new File(nomfile))){
-            while(sc.hasNextLine())
-            {
-                String linea = sc.nextLine();
+        try (BufferedReader bw = new BufferedReader(new FileReader(nomfile))) {
+            String linea;
+            while ((linea = bw.readLine()) != null) {
                 String[] tokens = linea.split("\\|");
-                Dueno dueño = new Dueno(Integer.parseInt(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5]);
+                Dueno dueño = new Dueno(
+                                Integer.parseInt(tokens[0]), 
+                                tokens[1], 
+                                tokens[2], 
+                                tokens[3], 
+                                tokens[4], 
+                                tokens[5]);
                 dueños.add(dueño);
             }
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e);
         }
         return dueños;        
     }
@@ -103,35 +92,27 @@ public class Dueno extends Persona{
         for(Dueno d: dueños)
         {
             if(d.email.equals(correo))
-                return d; // dar formato
+                return d;
         }
         return null;
     }
-    
-    public static int getIdDueñoSearchedByMail(String correo){
-        ArrayList<Dueno> dueños = readFileDueño("dueños.txt");
-        Dueno dueño = searchByCorreo(dueños, correo);
-        return dueño.id;
-    }
-    
+        
     public static Dueno getDueñoSearchedByMail(String correo){
-        ArrayList<Dueno> dueños = readFileDueño("dueños.txt");
+        ArrayList<Dueno> dueños = readFileDueño("duenos.txt");
         Dueno dueño = searchByCorreo(dueños, correo);
         return dueño;
     }
     
     public static Boolean correoInFile(String correo){
-        try(Scanner sc = new Scanner(new File("dueños.txt")))
-        {
-            while(sc.hasNextLine()){                
-                String linea = sc.nextLine();
-                String[] tokens = linea.split("\\|");
+        try (BufferedReader bw = new BufferedReader(new FileReader("duenos.txt"))) {
+            String linea;
+            while ((linea = bw.readLine()) != null) {
+                String [] tokens = linea.split("|");
                 if(tokens[5].equals(correo))
                     return true;
-           }   
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
+            }
+        } catch (Exception e) {
+            System.out.println(e);
         }
         return false;
     }    

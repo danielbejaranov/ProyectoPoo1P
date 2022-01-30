@@ -97,27 +97,6 @@ public class Evaluacion {
         return "Evaluacion{" + "nota=" + nota + '}';
     }
     
-    public static Evaluacion nextEvaluacion (Scanner sc, String nomfile){
-        int id = Util.nextID(nomfile);
-        String correo;        
-        do{
-            System.out.println("Ingrese el correo electrónico del Dueño de la mascota: ");
-            correo = sc.next();
-        }while(!(MiembroJurado.correoInFile(correo)));
-        
-        System.out.println("Ingrese el id de la inscripción: ");
-        int idInscripcion = sc.nextInt();
-        
-        System.out.println("Ingrese id del criterio: ");
-        int idCriterio = sc.nextInt();
-        
-        System.out.println("Ingrese la nota de la evaluacion: ");
-        double notaEvaluacion = sc.nextDouble();
-        
-        //Evaluacion v1 = new Evaluacion(mail,idInscripcion,idCriterio,notaEvaluacion);
-        //Evaluacion evaluacion = Evaluacion(id, idInscripcion, idCriterio, idMiembroJurado, inscripcion, miembroJurado, nota, criterio);
-        return null;
-    }
     public void saveFile(String nomfile){
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
             pw.println(this.nota );

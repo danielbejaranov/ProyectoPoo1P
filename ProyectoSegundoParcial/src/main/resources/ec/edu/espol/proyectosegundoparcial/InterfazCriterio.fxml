@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="ec.edu.espol.controllers.InterfazCriterioController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controllers.InterfazCriterioController">
    <children>
       <Label layoutX="230.0" layoutY="39.0" text="Menu Criterio">
          <font>
@@ -19,9 +18,11 @@
             <Font name="Courier New" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="77.0" layoutY="101.0" text="Descripcion:" />
+      <Label layoutX="73.0" layoutY="145.0" text="Descripcion:" />
       <Button fx:id="btnEnviar" layoutX="448.0" layoutY="345.0" mnemonicParsing="false" onAction="#Enviar" text="Enviar" />
       <Button fx:id="btnRegresar" layoutX="519.0" layoutY="345.0" mnemonicParsing="false" onAction="#regresarMenu" text="Regresar" />
-      <TextArea fx:id="txtDescripcion" layoutX="164.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextArea fx:id="txtDescripcion" layoutX="164.0" layoutY="145.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label layoutX="77.0" layoutY="98.0" text="Concurso: " />
+      <TextArea fx:id="txtConcurso" layoutX="164.0" layoutY="88.0" prefHeight="17.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

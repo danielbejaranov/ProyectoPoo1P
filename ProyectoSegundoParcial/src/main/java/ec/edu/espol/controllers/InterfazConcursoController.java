@@ -11,7 +11,6 @@ import ec.edu.espol.util.Util;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -76,8 +75,7 @@ public class InterfazConcursoController implements Initializable {
     private int id,dia,dia1,dia2,mes,mes1,mes2,ano,ano1,ano2;
     private String nombre,tematica;
     private double costo;
-    private LocalDate fechaCierre,fechaInicio;
-    private LocalDateTime fechaConcurso;
+    private LocalDate fechaCierre,fechaInicio, fechaConcurso;
 
     /**
      * Initializes the controller class.
@@ -93,7 +91,23 @@ public class InterfazConcursoController implements Initializable {
         nombre = txtNombres.getText();
         tematica = txtTematica.getText();
         //hazte las fechas plz
+        dia = Integer.valueOf(txtDia.getText());
+        mes = Integer.valueOf(txtMes.getText());
+        ano = Integer.valueOf(txtAno.getText());        
+        fechaConcurso = LocalDate.of(ano,mes,dia);
+
+        dia1 = Integer.valueOf(txtDia1.getText());
+        mes1 = Integer.valueOf(txtMes1.getText());
+        ano1 = Integer.valueOf(txtAno1.getText());        
+        fechaInicio = LocalDate.of(ano1, mes1, dia1);
+        
+        dia2 = Integer.valueOf(txtDia2.getText());
+        mes2 = Integer.valueOf(txtMes2.getText());
+        ano2 = Integer.valueOf(txtAno2.getText());        
+        fechaConcurso = LocalDate.of(ano2, mes2, dia2);
+        
         costo = Double.parseDouble(txtCosto.getText());
+        
         Concurso c = new Concurso(id,nombre,fechaConcurso,fechaInicio,fechaCierre,tematica,costo);
         c.saveFile("concursos.txt");
         txtNombres.clear();

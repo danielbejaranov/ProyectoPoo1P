@@ -75,7 +75,7 @@ public class Premio {
         
         System.out.println("Ingrese nombre del concurso: ");
         String nombreConcurso = sc.next();
-        int idConcurso = Concurso.getIdConcursoSearchedByNombre(nombreConcurso); 
+        int idConcurso = Concurso.getConcursoSearchedByNombre(nombreConcurso).getId(); 
                 
         for (Premio p : premios)
         {

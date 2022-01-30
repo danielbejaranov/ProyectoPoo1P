@@ -73,16 +73,13 @@ public class InterfazDueñoController implements Initializable {
         
         Dueno d1 = new Dueno(id,nombres,apellidos,direccion,telefono,email);
         d1.saveFile("duenos.txt");
-        duenos = Dueno.readFileDueño("duenos.txt");
-        //d1.agregarDueno(duenos,d1);
-        System.out.println(duenos);
+
         txtNombres.clear();
         txtApellidos.clear();
         txtDireccion.clear();
         txtTelefono.clear();
         txtEmail.clear();
-        
-        
+                
     }
 
     @FXML

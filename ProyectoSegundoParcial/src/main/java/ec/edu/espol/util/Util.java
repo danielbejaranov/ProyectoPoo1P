@@ -5,7 +5,12 @@
  */
 package ec.edu.espol.util;
 
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 /**
@@ -20,19 +25,16 @@ public class Util {
     public static int nextID(String nomfile)
     {
         int id = 0;
-        try(Scanner sc = new Scanner(new File(nomfile)))
-        {
-           while(sc.hasNextLine())
-           {
-               String linea = sc.nextLine();
-               String[] tokens = linea.split("\\|");
-               id = Integer.parseInt(tokens[0]);
-           }
+        try (BufferedReader bw = new BufferedReader(new FileReader(nomfile))) {
+            String linea;
+            while ((linea = bw.readLine()) != null) {
+                String [] tokens = linea.split("|");
+                id = Integer.parseInt(tokens[0]);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
         }
-        catch(Exception e)
-        {
-        }
-        return id+1;
+        return id+1;        
     }
     
 }

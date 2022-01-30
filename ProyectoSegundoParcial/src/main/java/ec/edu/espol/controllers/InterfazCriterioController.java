@@ -5,11 +5,14 @@
  */
 package ec.edu.espol.controllers;
 
+import ec.edu.espol.model.Concurso;
 import ec.edu.espol.model.Criterio;
 import ec.edu.espol.proyectosegundoparcial.App;
 import ec.edu.espol.util.Util;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,8 +33,12 @@ public class InterfazCriterioController implements Initializable {
     private Button btnRegresar;
     @FXML
     private TextArea txtDescripcion;
+    @FXML
+    private TextArea txtConcurso;
+    
     private int id,idConcurso;
-    private String descripcion;
+    private String descripcion, concurso;
+   
 
     /**
      * Initializes the controller class.
@@ -42,8 +49,11 @@ public class InterfazCriterioController implements Initializable {
     }    
 
     @FXML
-    private void Enviar(ActionEvent event) {
+    private void Enviar(ActionEvent event) throws ParseException {
         id = Util.nextID("criterios.txt");
+        concurso = txtConcurso.getText();
+        idConcurso = Concurso.getConcursoSearchedByNombre(concurso).getId();
+        
         descripcion = txtDescripcion.getText();
         Criterio c = new Criterio(descripcion,id,idConcurso);
         c.saveFile("criterios.txt");

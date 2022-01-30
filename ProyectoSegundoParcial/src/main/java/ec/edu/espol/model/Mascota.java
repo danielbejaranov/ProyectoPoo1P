@@ -5,7 +5,6 @@
  */
 package ec.edu.espol.model;
 
-import static ec.edu.espol.model.Dueno.getIdDueñoSearchedByMail;
 import ec.edu.espol.util.Util;
 import java.io.BufferedReader;
 import java.io.File;
@@ -110,7 +109,7 @@ public class Mascota {
             correo = sc.next();
         }while(!(Dueno.correoInFile(correo)));
         
-        int idDueño = getIdDueñoSearchedByMail(correo);
+        int idDueño = Dueno.getDueñoSearchedByMail(correo).getId();
         System.out.println("Ingrese el nombre de su mascota: ");
         String nombre = sc.next();
         

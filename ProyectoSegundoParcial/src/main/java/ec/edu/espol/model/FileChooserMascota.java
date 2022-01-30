@@ -88,9 +88,9 @@ public class FileChooserMascota extends Application {
                 if (file != null) {
                     label.setText(file.getAbsolutePath()
                             + "  ruta de guardado");
-                    String name = file.getName();
+                    /*String name = file.getName();
                     String extension = name.substring(1 + name.lastIndexOf(".")).toLowerCase();
-                    ImageIO.write(img, extension, f1);
+                    ImageIO.write(img, extension, f1);*/
                 }
             }
         };

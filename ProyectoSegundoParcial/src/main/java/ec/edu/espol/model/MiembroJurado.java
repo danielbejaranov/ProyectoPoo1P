@@ -6,21 +6,25 @@
 package ec.edu.espol.model;
 
 import ec.edu.espol.util.Util;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class MiembroJurado extends Persona{
-    private String perfil;
-    private ArrayList<Evaluacion> evaluaciones;    
+    private String perfil;   
      
     public MiembroJurado(int id, String nombres, String apellidos, String telefono, String email, String perfil) {
         super(id, nombres, apellidos, telefono, email);
-        this.perfil = perfil;
-        this.evaluaciones = new ArrayList<>();        
+        this.perfil = perfil;       
     }
 
     public String getPerfil() {
@@ -93,38 +97,57 @@ public class MiembroJurado extends Persona{
     }
     
     public void saveFile(String nomfile){
-        try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
-            pw.println(this.id + "|" + this.nombres + "|" + this.apellidos + "|" + this.telefono + "|" + this.email + "|" + this.perfil + "|" + this.evaluaciones);
-        }
-        catch(Exception e){
-        System.out.println(e.getMessage());
-        }
+        StringBuilder sb = new StringBuilder();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomfile, true))) {
+            
+            sb.append(this.id).append("|");
+            sb.append(this.nombres).append("|");
+            sb.append(this.apellidos).append("|");
+            sb.append(this.telefono).append("|");
+            sb.append(this.email).append("|");
+            sb.append(this.perfil);
+            
+            bw.write(sb.toString());
+        } catch (IOException e) {
+            System.out.println(e);
+        }    
     }
     public static void saveFile(ArrayList<MiembroJurado> miembroJurados, String nomfile){
-        try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile)))){
-            for(MiembroJurado m : miembroJurados)
-                pw.println(m.id + "|" + m.nombres+ "|" + m.apellidos + "|" + m.telefono + "|" + m.email+ "|" + m.perfil + "|" + m.evaluaciones);
-        }
-        catch(Exception e){
-        System.out.println(e.getMessage());
-        }
+        StringBuilder sb = new StringBuilder();        
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomfile))) {            
+            for (MiembroJurado j : miembroJurados) {
+            sb.append(j.id).append("|");
+            sb.append(j.nombres).append("|");
+            sb.append(j.apellidos).append("|");
+            sb.append(j.telefono).append("|");
+            sb.append(j.email).append("|");
+            sb.append(j.perfil);             
+            }
+            bw.write(sb.toString());
+        } catch (IOException e) {
+            System.out.println(e);
+        }  
     }
     
     public static ArrayList<MiembroJurado> readFileMiembroJurado(String nomfile){
         ArrayList<MiembroJurado> jurados = new ArrayList<>();
-        try(Scanner sc = new Scanner(new File(nomfile))){
-            while(sc.hasNextLine())
-            {
-                String linea = sc.nextLine();
-                String[] tokens = linea.split("\\|");
-                MiembroJurado jurado = new MiembroJurado(Integer.parseInt(tokens[0]), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5]);
-                jurados.add(jurado);
+        try (BufferedReader bw = new BufferedReader(new FileReader(nomfile))) {
+            String linea;
+            while ((linea = bw.readLine()) != null) {
+                String [] tokens = linea.split("|");
+                MiembroJurado j = new MiembroJurado(
+                                Integer.parseInt(tokens[0]), 
+                                tokens[1],
+                                tokens[2],
+                                tokens[3],
+                                tokens[4],
+                                tokens[5]);                        
+                jurados.add(j);
             }
+        } catch (Exception e) {
+            System.out.println(e);
         }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        return jurados;        
+        return jurados;                
     }    
     public static MiembroJurado searchByCorreo(ArrayList<MiembroJurado> jurados, String correo){
         for(MiembroJurado j: jurados)

@@ -70,7 +70,7 @@ public class InterfazPremioController implements Initializable {
         lugar = Integer.parseInt(txtLugar.getText());
         descripcion = txtDescripcion.getText();
         
-        Premio p1 = new Premio(id,lugar,descripcion,idConcurso);
+        Premio p1 = new Premio(id,idConcurso,lugar,descripcion);
         p1.saveFile("premiox.txt");
         //d1.agregarDueno(p1, premios);
         txtLugar.clear();

@@ -162,5 +162,14 @@ public class Concurso {
         ArrayList<Concurso> concursos = readFileConcurso("concursos.txt");
         Concurso concurso = searchByNombre(concursos, nombre);
         return concurso;
-    }    
+    }
+    
+    public static ArrayList<String> getNombres(ArrayList<Concurso> concursos){
+        ArrayList<String> nombresConcursos = new ArrayList<String>();
+        for(Concurso c : concursos){
+            if(!nombresConcursos.contains(c.nombre))
+                nombresConcursos.add(c.nombre);       
+        }
+        return nombresConcursos; 
+    }
 }

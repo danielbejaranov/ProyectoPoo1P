@@ -19,15 +19,17 @@
             <Font name="Courier New" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="77.0" layoutY="255.0" prefHeight="23.0" prefWidth="29.0" text="Nota:" />
-      <TextField fx:id="txtNota" layoutX="137.0" layoutY="254.0" />
+      <Label layoutX="77.0" layoutY="279.0" prefHeight="23.0" prefWidth="29.0" text="Nota:" />
+      <TextField fx:id="txtNota" layoutX="152.0" layoutY="278.0" />
       <Button fx:id="btnEnviar" layoutX="448.0" layoutY="345.0" mnemonicParsing="false" onAction="#Enviar" text="Enviar" />
       <Button fx:id="btnRegresar" layoutX="519.0" layoutY="345.0" mnemonicParsing="false" onAction="#regresarMenu" text="Regresar" />
       <Label layoutX="77.0" layoutY="107.0" prefHeight="23.0" prefWidth="48.0" text="Jurado:" />
       <Label layoutX="77.0" layoutY="154.0" prefHeight="23.0" prefWidth="48.0" text="Dueño:" />
-      <ComboBox fx:id="cbJurado" layoutX="137.0" layoutY="106.0" prefWidth="150.0" />
-      <ComboBox fx:id="cbDueno" layoutX="137.0" layoutY="153.0" prefWidth="150.0" />
+      <ComboBox fx:id="cbJurado" layoutX="151.0" layoutY="106.0" prefWidth="150.0" />
+      <ComboBox fx:id="cbDueno" layoutX="151.0" layoutY="153.0" prefWidth="150.0" />
       <Label layoutX="77.0" layoutY="200.0" prefHeight="23.0" prefWidth="48.0" text="Mascota:" />
-      <ComboBox fx:id="cbMascota" layoutX="137.0" layoutY="199.0" prefWidth="150.0" />
+      <ComboBox fx:id="cbMascota" layoutX="151.0" layoutY="199.0" prefWidth="150.0" />
+      <Label layoutX="77.0" layoutY="237.0" prefHeight="23.0" prefWidth="63.0" text="Concurso:" />
+      <ComboBox fx:id="cbConcurso" layoutX="151.0" layoutY="236.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

@@ -5,17 +5,12 @@
  */
 package ec.edu.espol.model;
 
-import ec.edu.espol.util.Util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Dueno extends Persona{
     private String direccion;
@@ -114,5 +109,14 @@ public class Dueno extends Persona{
             System.out.println(e);
         }
         return false;
-    }    
+    }
+    
+    public static ArrayList<String> getNombres(ArrayList<Dueno> duenos){
+        ArrayList<String> nombresDuenos = new ArrayList<String>();
+        for(Dueno d : duenos){
+            if(!nombresDuenos.contains(d.nombres))
+                nombresDuenos.add(d.nombres);       
+        }
+        return nombresDuenos;    
+    }
 }

@@ -5,7 +5,6 @@
  */
 package ec.edu.espol.model;
 
-import ec.edu.espol.util.Util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -13,7 +12,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
@@ -101,44 +99,6 @@ public class Mascota extends Application{
     public void setInscripciones(ArrayList<Inscripcion> inscripciones) {
         this.inscripciones = inscripciones;
     }
-    
-    public static Mascota nextMascota (Scanner sc, String nomfile){
-        System.out.println("Registrar Mascota");
-        
-        int id = Util.nextID(nomfile);
-        String correo;        
-        do{
-            System.out.println("Ingrese el correo electrónico del Dueño de la mascota: ");
-            correo = sc.next();
-        }while(!(Dueno.correoInFile(correo)));
-        
-        int idDueño = Dueno.getDueñoSearchedByMail(correo).getId();
-        System.out.println("Ingrese el nombre de su mascota: ");
-        String nombre = sc.next();
-        
-        System.out.println("Ingrese la raza de su mascota: ");
-        String raza = sc.next();
-        
-        System.out.println("Ingrese el tipo de su mascota: ");
-        String tipo = sc.next();
-        
-        System.out.println("Ingrese el año de nacimiento de su mascota: ");
-        int year = sc.nextInt();
-        
-        System.out.println("Ingrese el mes de nacimiento de su mascota: ");
-        int mes = sc.nextInt() ;
-        
-        System.out.println("Ingrese el día de nacimiento de su mascota:");
-        int dia = sc.nextInt();
-        
-        LocalDate fechaNacimiento = LocalDate.of(year, mes, dia);
-        
-        
-        Mascota mascota = new Mascota(id, idDueño, nombre, raza, tipo, fechaNacimiento);
-        mascota.saveFile(nomfile);   
-        
-        return mascota;
-    }
 
     public void saveFile(String nomfile){
         StringBuilder sb = new StringBuilder();
@@ -168,7 +128,7 @@ public class Mascota extends Application{
             sb.append(m.nombre).append("|");
             sb.append(m.raza).append("|");
             sb.append(m.tipo).append("|");
-            sb.append(m.fechaNacimiento).append("|");               
+            sb.append(m.fechaNacimiento);               
             }
             bw.write(sb.toString());
         } catch (IOException e) {
@@ -228,8 +188,15 @@ public class Mascota extends Application{
     public static void main(String[] args) {
         launch(args);
     }
-
+    
+    public static ArrayList<String> getNombres(ArrayList<Mascota> mascotas){
+        ArrayList<String> nombresMascotas = new ArrayList<String>();
+        for(Mascota m : mascotas){
+            if(!nombresMascotas.contains(m.nombre))
+                nombresMascotas.add(m.nombre);       
+        }
+        return nombresMascotas;    
 }
-
+}
 
 

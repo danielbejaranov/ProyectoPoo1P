@@ -12,4 +12,3 @@ ec\edu\espol\model\MiembroJurado.class
 ec\edu\espol\controllers\InterfazController.class
 ec\edu\espol\model\Mascota.class
 ec\edu\espol\model\Persona.class
-ec\edu\espol\controllers\InterfazPremioController.class

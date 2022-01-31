@@ -5,12 +5,18 @@
  */
 package ec.edu.espol.controllers;
 
+import ec.edu.espol.model.Concurso;
+import ec.edu.espol.model.Dueno;
 import ec.edu.espol.model.Evaluacion;
+import ec.edu.espol.model.Mascota;
+import ec.edu.espol.model.MiembroJurado;
 import ec.edu.espol.proyectosegundoparcial.App;
 import ec.edu.espol.util.Util;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,21 +39,43 @@ public class InterfazEvaluacionController implements Initializable {
     private Button btnRegresar;
     private int id,idInscripcion,idCriterio,idMiembroJurado;
     private double nota;
+    ArrayList<MiembroJurado> jurados;
+    ArrayList<Dueno> duenos;
+    ArrayList<Mascota> mascotas;
+    ArrayList<Concurso> concursos;
+    
     @FXML
-    private ComboBox<?> cbJurado;
+    private ComboBox<String> cbJurado;
     @FXML
-    private ComboBox<?> cbDueno;
+    private ComboBox<String> cbDueno;
     @FXML
-    private ComboBox<?> cbMascota;
+    private ComboBox<String> cbMascota;
+    @FXML
+    private ComboBox<String> cbConcurso;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        this.jurados = MiembroJurado.readFileMiembroJurado("rutinas.txt");
+        ArrayList<String> nombresJurados = MiembroJurado.getNombres(jurados);       
+        cbJurado.setItems(FXCollections.observableArrayList(nombresJurados));
+        
+        this.duenos = Dueno.readFileDueño("duenos.txt");
+        ArrayList<String> nombresDuenos = Dueno.getNombres(duenos);
+        cbDueno.setItems(FXCollections.observableArrayList(nombresDuenos));
+        
+        this.mascotas = Mascota.readFileMascota("mascotas.txt");
+        ArrayList<String> nombresMascotas = Mascota.getNombres(mascotas);
+        cbMascota.setItems(FXCollections.observableArrayList(nombresMascotas));
+        
+        this.concursos= Concurso.readFileConcurso("concursos.txt");
+        ArrayList<String> nombresConcursos = Concurso.getNombres(concursos);
+        cbConcurso.setItems(FXCollections.observableArrayList(nombresConcursos));        
+        
     }    
-//INTEGRAR LAS LISTAS, TODOS LOS MÉTODOS SE ENCUENTRAN EN LA CLASE EVALUACION
+
     @FXML
     private void Enviar(ActionEvent event) {//CORREGIR
         id = Util.nextID("evaluaciones.txt");

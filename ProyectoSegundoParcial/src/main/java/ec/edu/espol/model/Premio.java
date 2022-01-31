@@ -1,28 +1,21 @@
 package ec.edu.espol.model;
 
-import ec.edu.espol.util.Util;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-import java.text.ParseException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Premio {
-   private int lugar,id, idConcurso;
+   private int id, idConcurso, lugar;
    private String descripcion;
-   
-   public Premio(int id, int lugar,String descripcion, int idConcurso){
-       this.lugar = lugar;
-       this.descripcion = descripcion;
-   } 
 
-    public Premio(int lugar, int id, String descripcion) {
-        this.lugar = lugar;
+    public Premio(int id, int idConcurso, int lugar, String descripcion) {
         this.id = id;
+        this.idConcurso = idConcurso;
+        this.lugar = lugar;
         this.descripcion = descripcion;
     }
-
+   
     public int getLugar() {
         return lugar;
     }
@@ -53,53 +46,35 @@ public class Premio {
 
     public void setIdConcurso(int idConcurso) {
         this.idConcurso = idConcurso;
-    }
-    
-    
-    public static void nextPremio (Scanner sc,String nomfile) throws ParseException{
-
-        int id = Util.nextID(nomfile);
-        System.out.println("Ingrese el número de Premios");
-        int numeroPremios = sc.nextInt();
-        ArrayList<Premio> premios = new ArrayList<>();
-        
-        for(int i = 0; i < numeroPremios; i++){
-            System.out.println("Ingrese el lugar: ");
-            int lugar = sc.nextInt();
-            System.out.println("Ingrese una descripcion: ");
-            String descripcion = sc.next();
-            
-            Premio p1 = new Premio(id,lugar,descripcion);
-            premios.add(p1);
-        } 
-        
-        System.out.println("Ingrese nombre del concurso: ");
-        String nombreConcurso = sc.next();
-        int idConcurso = Concurso.getConcursoSearchedByNombre(nombreConcurso).getId(); 
-                
-        for (Premio p : premios)
-        {
-            p.setIdConcurso(id);
-        }
-        saveFile(premios,nomfile);
-    }
+    }   
     
     public void saveFile(String nomfile){
-        try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true))){
-            pw.println(this.id+","+this.lugar + "," + this.descripcion );
-        }
-        catch(Exception e){
-        System.out.println(e.getMessage());
-        }
+        StringBuilder sb = new StringBuilder();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomfile, true))) {
+            
+            sb.append(this.id).append("|");
+            sb.append(this.idConcurso).append("|");
+            sb.append(this.lugar).append("|");
+            sb.append(this.descripcion);
+            
+            bw.write(sb.toString());
+        } catch (IOException e) {
+            System.out.println(e);
+        }        
     }
     public static void saveFile(ArrayList<Premio> premios, String nomfile){
-        try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile)))){
-            for(Premio m : premios)
-                pw.println(m.id+","+m.lugar + "," + m.descripcion );
-        }
-        catch(Exception e){
-        System.out.println(e.getMessage());
-        }
+        StringBuilder sb = new StringBuilder();        
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomfile))) {            
+            for (Premio p : premios) {
+                sb.append(p.id).append("|");
+                sb.append(p.idConcurso).append("|");
+                sb.append(p.lugar).append("|");
+                sb.append(p.descripcion);                
+            }
+            bw.write(sb.toString());
+        } catch (IOException e) {
+            System.out.println(e);
+        }         
     }
     
 }

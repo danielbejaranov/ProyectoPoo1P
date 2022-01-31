@@ -161,5 +161,14 @@ public class MiembroJurado extends Persona{
             System.out.println(e.getMessage());
         }
         return false;
-    }     
+    }
+    
+    public static ArrayList<String> getNombres(ArrayList<MiembroJurado> jurados){
+        ArrayList<String> nombresJurados = new ArrayList<String>();
+        for(MiembroJurado j : jurados){
+            if(!nombresJurados.contains(j.nombres))
+                nombresJurados.add(j.nombres);       
+        }
+        return nombresJurados;
+    }    
 }

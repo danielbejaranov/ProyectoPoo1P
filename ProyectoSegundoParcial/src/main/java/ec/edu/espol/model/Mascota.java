@@ -105,8 +105,8 @@ public class Mascota extends Application {
             sb.append(this.idDueño).append("|");
             sb.append(this.nombre).append("|");
             sb.append(this.raza).append("|");
-            sb.append(this.tipo).append("|");
-            sb.append(this.fechaNacimiento);
+            sb.append(this.fechaNacimiento).append("|");
+            sb.append(this.tipo);
 
             bw.write(sb.toString());
         } catch (IOException e) {
@@ -122,9 +122,9 @@ public class Mascota extends Application {
                 sb.append(m.id).append("|");
                 sb.append(m.idDueño).append("|");
                 sb.append(m.nombre).append("|");
-                sb.append(m.raza).append("|");
-                sb.append(m.tipo).append("|");
-                sb.append(m.fechaNacimiento);
+                sb.append(m.raza).append("|");  
+                sb.append(m.fechaNacimiento).append("|");
+                sb.append(m.tipo);
             }
             bw.write(sb.toString());
         } catch (IOException e) {

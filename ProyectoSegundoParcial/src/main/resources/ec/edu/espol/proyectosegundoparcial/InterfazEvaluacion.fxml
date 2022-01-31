@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -31,5 +32,6 @@
       <ComboBox fx:id="cbMascota" layoutX="151.0" layoutY="199.0" prefWidth="150.0" />
       <Label layoutX="77.0" layoutY="237.0" prefHeight="23.0" prefWidth="63.0" text="Concurso:" />
       <ComboBox fx:id="cbConcurso" layoutX="151.0" layoutY="236.0" prefWidth="150.0" />
+      <ImageView fx:id="imgviewMascota" fitHeight="150.0" fitWidth="200.0" layoutX="372.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

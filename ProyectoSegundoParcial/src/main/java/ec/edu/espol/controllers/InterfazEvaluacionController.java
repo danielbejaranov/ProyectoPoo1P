@@ -23,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -52,6 +53,8 @@ public class InterfazEvaluacionController implements Initializable {
     private ComboBox<String> cbMascota;
     @FXML
     private ComboBox<String> cbConcurso;
+    @FXML
+    private ImageView imgviewMascota;
 
     /**
      * Initializes the controller class.

@@ -58,7 +58,7 @@ public class InterfazEvaluacionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.jurados = MiembroJurado.readFileMiembroJurado("rutinas.txt");
+        this.jurados = MiembroJurado.readFileMiembroJurado("jurados.txt");
         ArrayList<String> nombresJurados = MiembroJurado.getNombres(jurados);       
         cbJurado.setItems(FXCollections.observableArrayList(nombresJurados));
         
@@ -66,8 +66,9 @@ public class InterfazEvaluacionController implements Initializable {
         ArrayList<String> nombresDuenos = Dueno.getNombres(duenos);
         cbDueno.setItems(FXCollections.observableArrayList(nombresDuenos));
         
-        this.mascotas = Mascota.readFileMascota("mascotas.txt");
+        this.mascotas = Mascota.readFileMascota("mascotas.txt"); //lista de mascotas 
         ArrayList<String> nombresMascotas = Mascota.getNombres(mascotas);
+        System.out.println(nombresMascotas);
         cbMascota.setItems(FXCollections.observableArrayList(nombresMascotas));
         
         this.concursos= Concurso.readFileConcurso("concursos.txt");

@@ -16,9 +16,8 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
 
+public class Mascota extends Application {
 
-
-public class Mascota extends Application{
     private int id, idDueño;
     private String nombre, raza, tipo;
     private LocalDate fechaNacimiento;
@@ -41,8 +40,6 @@ public class Mascota extends Application{
 
     public Mascota() {
     }
-    
-    
 
     public int getId() {
         return id;
@@ -100,35 +97,34 @@ public class Mascota extends Application{
         this.inscripciones = inscripciones;
     }
 
-    public void saveFile(String nomfile){
+    public void saveFile(String nomfile) {
         StringBuilder sb = new StringBuilder();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomfile, true))) {
-            
+
             sb.append(this.id).append("|");
             sb.append(this.idDueño).append("|");
             sb.append(this.nombre).append("|");
             sb.append(this.raza).append("|");
             sb.append(this.tipo).append("|");
-            sb.append(this.fechaNacimiento).append("|");
- 
-            
+            sb.append(this.fechaNacimiento);
+
             bw.write(sb.toString());
         } catch (IOException e) {
             System.out.println(e);
-        }        
-        
+        }
+
     }
-  
-    public static void saveFile(ArrayList<Mascota> mascotas, String nomfile){
-        StringBuilder sb = new StringBuilder();        
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomfile))) {            
+
+    public static void saveFile(ArrayList<Mascota> mascotas, String nomfile) {
+        StringBuilder sb = new StringBuilder();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomfile))) {
             for (Mascota m : mascotas) {
-            sb.append(m.id).append("|");
-            sb.append(m.idDueño).append("|");
-            sb.append(m.nombre).append("|");
-            sb.append(m.raza).append("|");
-            sb.append(m.tipo).append("|");
-            sb.append(m.fechaNacimiento);               
+                sb.append(m.id).append("|");
+                sb.append(m.idDueño).append("|");
+                sb.append(m.nombre).append("|");
+                sb.append(m.raza).append("|");
+                sb.append(m.tipo).append("|");
+                sb.append(m.fechaNacimiento);
             }
             bw.write(sb.toString());
         } catch (IOException e) {
@@ -136,67 +132,64 @@ public class Mascota extends Application{
         }
     }
 
-    public static ArrayList<Mascota> readFileMascota(String nomfile){
+    public static ArrayList<Mascota> readFileMascota(String nomfile) {
         ArrayList<Mascota> mascotas = new ArrayList<>();
         try (BufferedReader bw = new BufferedReader(new FileReader(nomfile))) {
             String linea;
             while ((linea = bw.readLine()) != null) {
-                String [] tokens = linea.split("|");
+                String[] tokens = linea.split("\\|");
                 Mascota m = new Mascota(
-                                Integer.parseInt(tokens[0]),
-                                Integer.parseInt(tokens[1]), 
-                                tokens[2],
-                                tokens[3],
-                                tokens[5],
-                                LocalDate.parse(tokens[4]));                                                                                
+                        Integer.parseInt(tokens[0]),
+                        Integer.parseInt(tokens[1]),
+                        tokens[2],
+                        tokens[3],
+                        tokens[5],
+                        LocalDate.parse(tokens[4]));
                 mascotas.add(m);
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-        return mascotas; 
+        return mascotas;
     }
 
-    public static Mascota searchByNombre(ArrayList<Mascota> mascotas, String nombre){
-        for(Mascota m: mascotas)
-        {
-            if(m.nombre.equals(nombre))
+    public static Mascota searchByNombre(ArrayList<Mascota> mascotas, String nombre) {
+        for (Mascota m : mascotas) {
+            if (m.nombre.equals(nombre)) {
                 return m;
+            }
         }
         return null;
     }
-    
-    public static int getIdMascotaSearchedByNombre(String nombre){
+
+    public static int getIdMascotaSearchedByNombre(String nombre) {
         ArrayList<Mascota> mascotas = readFileMascota("mascotas.txt");
         Mascota mascota = searchByNombre(mascotas, nombre);
         return mascota.id;
     }
-    
-    public static Mascota getDueñoSearchedByNombre(String nombre){
+
+    public static Mascota getDueñoSearchedByNombre(String nombre) {
         ArrayList<Mascota> mascotas = readFileMascota("mascotas.txt");
-        Mascota mascota= searchByNombre(mascotas, nombre);
+        Mascota mascota = searchByNombre(mascotas, nombre);
         return mascota;
     }
 
-    
+    public static ArrayList<String> getNombres(ArrayList<Mascota> mascotas) {
+        ArrayList<String> nombresMascotas = new ArrayList<String>();
+        for (Mascota m : mascotas) {
+            if (!nombresMascotas.contains(m.nombre)) 
+                nombresMascotas.add(m.nombre);
+        }
+        return nombresMascotas;
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
-
 
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-    
-    public static ArrayList<String> getNombres(ArrayList<Mascota> mascotas){
-        ArrayList<String> nombresMascotas = new ArrayList<String>();
-        for(Mascota m : mascotas){
-            if(!nombresMascotas.contains(m.nombre))
-                nombresMascotas.add(m.nombre);       
-        }
-        return nombresMascotas;    
-}
-}
 
-
+}

@@ -105,7 +105,7 @@ public class MiembroJurado extends Persona{
             sb.append(this.apellidos).append("|");
             sb.append(this.telefono).append("|");
             sb.append(this.email).append("|");
-            sb.append(this.perfil);
+            sb.append(this.perfil).append(System.getProperty("line.separator")); //(int id, String nombres, String apellidos, String telefono, String email, String perfil) {
             
             bw.write(sb.toString());
         } catch (IOException e) {
@@ -116,12 +116,15 @@ public class MiembroJurado extends Persona{
         StringBuilder sb = new StringBuilder();        
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomfile))) {            
             for (MiembroJurado j : miembroJurados) {
+            
             sb.append(j.id).append("|");
             sb.append(j.nombres).append("|");
             sb.append(j.apellidos).append("|");
             sb.append(j.telefono).append("|");
             sb.append(j.email).append("|");
-            sb.append(j.perfil);             
+            sb.append(j.perfil).append(System.getProperty("line.separator"));  
+            
+            
             }
             bw.write(sb.toString());
         } catch (IOException e) {
@@ -134,8 +137,8 @@ public class MiembroJurado extends Persona{
         try (BufferedReader bw = new BufferedReader(new FileReader(nomfile))) {
             String linea;
             while ((linea = bw.readLine()) != null) {
-                String [] tokens = linea.split("|");
-                MiembroJurado j = new MiembroJurado(
+                String [] tokens = linea.split("\\|");
+                MiembroJurado j = new MiembroJurado( //3|nick|arevalo|0987654|n|nperfil
                                 Integer.parseInt(tokens[0]), 
                                 tokens[1],
                                 tokens[2],
@@ -189,9 +192,12 @@ public class MiembroJurado extends Persona{
     public static ArrayList<String> getNombres(ArrayList<MiembroJurado> jurados){
         ArrayList<String> nombresJurados = new ArrayList<String>();
         for(MiembroJurado j : jurados){
+            
             if(!nombresJurados.contains(j.nombres))
                 nombresJurados.add(j.nombres);       
+            
         }
         return nombresJurados;
     }    
 }
+

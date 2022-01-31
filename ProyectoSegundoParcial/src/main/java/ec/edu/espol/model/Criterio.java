@@ -56,7 +56,7 @@ public class Criterio {
 
             sb.append(this.id).append("|");
             sb.append(this.idConcurso).append("|");
-            sb.append(this.descripcion);
+            sb.append(this.descripcion).append(System.getProperty("line.separator"));;
 
             bw.write(sb.toString());
         } catch (IOException e) {
@@ -71,7 +71,7 @@ public class Criterio {
                 
                 sb.append(c.id).append("|");
                 sb.append(c.idConcurso).append("|");
-                sb.append(c.descripcion);
+                sb.append(c.descripcion).append(System.getProperty("line.separator"));;
                 
             bw.write(sb.toString());
             }

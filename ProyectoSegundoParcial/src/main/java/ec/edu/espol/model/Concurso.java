@@ -101,7 +101,7 @@ public class Concurso {
             sb.append(this.fechaInicio).append("|");
             sb.append(this.fechaCierre).append("|");
             sb.append(this.tematica).append("|");
-            sb.append(this.costo);
+            sb.append(this.costo).append(System.getProperty("line.separator"));;
             
             bw.write(sb.toString());
         } catch (IOException e) {
@@ -119,7 +119,7 @@ public class Concurso {
                 sb.append(c.fechaInicio).append("|");
                 sb.append(c.fechaCierre).append("|");
                 sb.append(c.tematica).append("|");
-                sb.append(c.costo);                
+                sb.append(c.costo).append(System.getProperty("line.separator"));;                
             }
             bw.write(sb.toString());
         } catch (IOException e) {

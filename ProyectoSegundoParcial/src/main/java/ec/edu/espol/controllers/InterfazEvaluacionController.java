@@ -12,8 +12,10 @@ import ec.edu.espol.model.Mascota;
 import ec.edu.espol.model.MiembroJurado;
 import ec.edu.espol.proyectosegundoparcial.App;
 import ec.edu.espol.util.Util;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -57,13 +59,16 @@ public class InterfazEvaluacionController implements Initializable {
     @FXML
     private ImageView imgviewMascota;
 
+    private Image imagen;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         this.jurados = MiembroJurado.readFileMiembroJurado("jurados.txt");
         ArrayList<String> nombresJurados = MiembroJurado.getNombres(jurados);
+        System.out.println(nombresJurados);
         cbJurado.setItems(FXCollections.observableArrayList(nombresJurados));
 
         this.duenos = Dueno.readFileDueño("duenos.txt");
@@ -78,8 +83,19 @@ public class InterfazEvaluacionController implements Initializable {
         this.concursos = Concurso.readFileConcurso("concursos.txt");
         ArrayList<String> nombresConcursos = Concurso.getNombres(concursos);
         cbConcurso.setItems(FXCollections.observableArrayList(nombresConcursos));
-
+        
+        cbMascota.setOnAction((e)->
+        {
+            String nombreMascota = cbMascota.getValue();
+        
+            int idMascota = Mascota.getIdMascotaSearchedByNombre(nombreMascota); // 1
+            
+            Image imagen = new Image("img/" +idMascota+".jpg");
+            imgviewMascota.setImage(imagen);
+        });
+         
     }
+
 
     @FXML
     private void Enviar(ActionEvent event) {//CORREGIR AHORA
@@ -94,15 +110,8 @@ public class InterfazEvaluacionController implements Initializable {
     private void regresarMenu(ActionEvent event) throws IOException {
         App.setRoot("Interfaz");
     }
-/*
-    private void showMascota(ArrayList<Mascota> mascotas) {//Completar
-        ArrayList<Integer> imagenes = Mascota.getID(this.mascotas);
-        String nombre archivo = 
-        Image img = new Image("img/" + imagen);
-        ImageView imv = new ImageView(img);
-        imv.setFitWidth(300);
-        imv.setFitHeight(300);
-        imgbox.getChildren().add(imv);
-    }
-*/
+
+    
+
+
 }

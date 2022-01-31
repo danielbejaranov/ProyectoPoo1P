@@ -106,7 +106,7 @@ public class Mascota extends Application {
             sb.append(this.nombre).append("|");
             sb.append(this.raza).append("|");
             sb.append(this.fechaNacimiento).append("|");
-            sb.append(this.tipo);
+            sb.append(this.tipo).append(System.getProperty("line.separator"));;
 
             bw.write(sb.toString());
         } catch (IOException e) {
@@ -124,7 +124,7 @@ public class Mascota extends Application {
                 sb.append(m.nombre).append("|");
                 sb.append(m.raza).append("|");  
                 sb.append(m.fechaNacimiento).append("|");
-                sb.append(m.tipo);
+                sb.append(m.tipo).append(System.getProperty("line.separator"));;
             }
             bw.write(sb.toString());
         } catch (IOException e) {

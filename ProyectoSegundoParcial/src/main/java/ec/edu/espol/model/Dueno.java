@@ -37,8 +37,7 @@ public class Dueno extends Persona{
             sb.append(this.apellidos).append("|");
             sb.append(this.direccion).append("|");
             sb.append(this.telefono).append("|");
-            sb.append(this.email);
-            sb.newline();
+            sb.append(this.email).append(System.getProperty("line.separator"));;
 
             bw.write(sb.toString());
         } catch (IOException e) {
@@ -55,7 +54,7 @@ public class Dueno extends Persona{
                 sb.append(d.apellidos).append("|");
                 sb.append(d.direccion).append("|");
                 sb.append(d.telefono).append("|");
-                sb.append(d.email);            
+                sb.append(d.email).append(System.getProperty("line.separator"));;            
             }
             bw.write(sb.toString());
         } catch (IOException e) {

@@ -80,7 +80,7 @@ public class Evaluacion {
             sb.append(this.idInscripcion).append("|");
             sb.append(this.idCriterio).append("|");
             sb.append(this.idMiembroJurado).append("|");
-            sb.append(this.nota);
+            sb.append(this.nota).append(System.getProperty("line.separator"));;
             
             bw.write(sb.toString());
         } catch (IOException e) {

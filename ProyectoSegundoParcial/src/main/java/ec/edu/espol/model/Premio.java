@@ -55,7 +55,7 @@ public class Premio {
             sb.append(this.id).append("|");
             sb.append(this.idConcurso).append("|");
             sb.append(this.lugar).append("|");
-            sb.append(this.descripcion);
+            sb.append(this.descripcion).append(System.getProperty("line.separator"));;
             
             bw.write(sb.toString());
         } catch (IOException e) {
@@ -69,7 +69,7 @@ public class Premio {
                 sb.append(p.id).append("|");
                 sb.append(p.idConcurso).append("|");
                 sb.append(p.lugar).append("|");
-                sb.append(p.descripcion);                
+                sb.append(p.descripcion).append(System.getProperty("line.separator"));;                
             }
             bw.write(sb.toString());
         } catch (IOException e) {

@@ -38,6 +38,7 @@ public class Dueno extends Persona{
             sb.append(this.direccion).append("|");
             sb.append(this.telefono).append("|");
             sb.append(this.email);
+            sb.newline();
 
             bw.write(sb.toString());
         } catch (IOException e) {

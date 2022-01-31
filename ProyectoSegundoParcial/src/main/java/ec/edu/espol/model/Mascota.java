@@ -182,6 +182,15 @@ public class Mascota extends Application {
         }
         return nombresMascotas;
     }
+    
+    public static ArrayList<Integer> getID(ArrayList<Mascota> mascotas) {
+        ArrayList<Integer> idMascotas = new ArrayList<Integer>();
+        for (Mascota m : mascotas) {
+            if (!idMascotas.contains(m.id)) 
+                idMascotas.add(m.id);
+        }
+        return idMascotas;
+    }    
 
     @Override
     public void start(Stage stage) throws Exception {

@@ -23,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -38,13 +39,13 @@ public class InterfazEvaluacionController implements Initializable {
     private Button btnEnviar;
     @FXML
     private Button btnRegresar;
-    private int id,idInscripcion,idCriterio,idMiembroJurado;
+    private int id, idInscripcion, idCriterio, idMiembroJurado;
     private double nota;
     ArrayList<MiembroJurado> jurados;
     ArrayList<Dueno> duenos;
     ArrayList<Mascota> mascotas;
     ArrayList<Concurso> concursos;
-    
+
     @FXML
     private ComboBox<String> cbJurado;
     @FXML
@@ -62,29 +63,29 @@ public class InterfazEvaluacionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.jurados = MiembroJurado.readFileMiembroJurado("jurados.txt");
-        ArrayList<String> nombresJurados = MiembroJurado.getNombres(jurados);       
+        ArrayList<String> nombresJurados = MiembroJurado.getNombres(jurados);
         cbJurado.setItems(FXCollections.observableArrayList(nombresJurados));
-        
+
         this.duenos = Dueno.readFileDueño("duenos.txt");
         ArrayList<String> nombresDuenos = Dueno.getNombres(duenos);
         cbDueno.setItems(FXCollections.observableArrayList(nombresDuenos));
-        
+
         this.mascotas = Mascota.readFileMascota("mascotas.txt"); //lista de mascotas 
         ArrayList<String> nombresMascotas = Mascota.getNombres(mascotas);
         System.out.println(nombresMascotas);
         cbMascota.setItems(FXCollections.observableArrayList(nombresMascotas));
-        
-        this.concursos= Concurso.readFileConcurso("concursos.txt");
+
+        this.concursos = Concurso.readFileConcurso("concursos.txt");
         ArrayList<String> nombresConcursos = Concurso.getNombres(concursos);
-        cbConcurso.setItems(FXCollections.observableArrayList(nombresConcursos));        
-        
-    }    
+        cbConcurso.setItems(FXCollections.observableArrayList(nombresConcursos));
+
+    }
 
     @FXML
-    private void Enviar(ActionEvent event) {//CORREGIR
+    private void Enviar(ActionEvent event) {//CORREGIR AHORA
         id = Util.nextID("evaluaciones.txt");
         nota = Double.parseDouble(txtNota.getText());
-        Evaluacion ev = new Evaluacion(id,idInscripcion,idCriterio,idMiembroJurado,nota);
+        Evaluacion ev = new Evaluacion(id, idInscripcion, idCriterio, idMiembroJurado, nota);
         ev.saveFile("evaluaciones.txt");
         txtNota.clear();
     }
@@ -93,5 +94,15 @@ public class InterfazEvaluacionController implements Initializable {
     private void regresarMenu(ActionEvent event) throws IOException {
         App.setRoot("Interfaz");
     }
-    
+/*
+    private void showMascota(ArrayList<Mascota> mascotas) {//Completar
+        ArrayList<Integer> imagenes = Mascota.getID(this.mascotas);
+        String nombre archivo = 
+        Image img = new Image("img/" + imagen);
+        ImageView imv = new ImageView(img);
+        imv.setFitWidth(300);
+        imv.setFitHeight(300);
+        imgbox.getChildren().add(imv);
+    }
+*/
 }
